@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Title of the document</title>
+</head>
+
+<body>
+    <ol>
+    {%for track in tracks %}
+    <a href= "{%url 'tracks:course_list' pk=track.pk %}"><li>{{track.name}}</li></a>
+    {%endfor%}
+    </ol>
+</body>
+
+</html>

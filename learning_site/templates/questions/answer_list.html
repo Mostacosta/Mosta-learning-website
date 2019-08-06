@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+{% load matags %}
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Title of the document</title>
+</head>
+
+<body>
+    <ol>
+        {%for answer in answers%}
+            <li>{{answer.the_answer}}  {{request.user|check:answer.likes}}</li>
+            {% if request.user|check:answer.likes %}
+                <a href="{% url 'questions:like' pk=answer.pk%}">unlike</a>
+            {%else%}
+                <h1><a href="{% url 'questions:like' pk=answer.pk%}">like</a></h1>
+            {%endif%}
+        {%endfor%}
+    </ol>
+</body>
+
+</html>
