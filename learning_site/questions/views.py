@@ -1,7 +1,10 @@
-from django.shortcuts import render,redirect
+from django.shortcuts import render,redirect,HttpResponse
 from tracks.models import lesson
 from .models import question,answer
 from .forms import question_form,answer_form
+from django.http import JsonResponse
+from django.core import serializers
+from django.template.loader import render_to_string
 # Create your views here.
 
 def question_view (request,pk):
@@ -13,9 +16,9 @@ def question_view (request,pk):
             new_question.lesson = lesson.objects.get(pk=pk)
             new_question.user = request.user
             new_question.save()
-            return redirect('questions:question_list',pk=pk)
+            return redirect('tracks:lesson_view',pk=pk)
     else:
-        return render (request,'questions/ask.html',{'form':form})
+        return redirect('tracks:lesson_view',pk=pk)
 
 def question_list(request,pk):
     questions = question.objects.filter(lesson=lesson.objects.get(pk=pk))
@@ -36,8 +39,17 @@ def answer_view(request,pk):
                 return render (request,'questions/answer.html',{'form':form})
 
 def answer_list (request,pk):
-        answers = answer.objects.filter(question=question.objects.get(pk=pk))
-        return render(request,'questions/answer_list.html',{'answers':answers})
+        question_ = question.objects.get(pk=pk)
+        answers = answer.objects.filter(question= question_)
+        form = answer_form()
+        if request.method == "POST":
+                form = answer_form(request.POST)
+                if form.is_valid():
+                        new_answer = form.save(commit=False)
+                        new_answer.question = question_
+                        new_answer.user = request.user
+                        new_answer.save()
+        return render(request,'questions/answer_list.html',{'answers':answers,"question":question_,"form":form})
 
 def answer_like (request,pk):
         the_answer = answer.objects.get(pk=pk)
@@ -46,7 +58,7 @@ def answer_like (request,pk):
                 the_answer.likes.remove(user)
         else:
                 the_answer.likes.add(user)
-        return redirect ('questions:answer_list',pk=the_answer.question.pk)
+        return HttpResponse("a7a")
 
 
 

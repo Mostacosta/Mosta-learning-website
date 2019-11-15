@@ -4,19 +4,54 @@
 <head>
 <meta charset="UTF-8">
 <title>Title of the document</title>
+<script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
+<script>
+        $(document).ready(function(){
+            console.log("ashta")
+ $('.like').click(function(e){
+     e.preventDefault();
+     $elem = $(this);
+     console.log($elem.attr("href"))
+ $.ajax({
+     url: $elem.attr("href"),
+     type: "get", // or "get"
+     data: JSON,
+     success: function(data) {
+         $elem.text(function(n){
+             var txt = $elem.text();
+             console.log(txt)
+             if (txt=="like")
+             {
+                 console.log('ss')
+                 return "unlike";
+             }else{
+                 return "like";
+             }
+     });
+     }});
+ });
+ });
+ </script>
 </head>
 
 <body>
+    <h1>{{question.question}}</h1>
     <ol>
         {%for answer in answers%}
-            <li>{{answer.the_answer}}  {{request.user|check:answer.likes}}</li>
+           <li> {{answer.the_answer}}  {{request.user|check:answer.likes}} </li>
             {% if request.user|check:answer.likes %}
-                <a href="{% url 'questions:like' pk=answer.pk%}">unlike</a>
+            <a class="like" href="{% url 'questions:like' pk=answer.pk%}">unlike</a>
             {%else%}
-                <h1><a href="{% url 'questions:like' pk=answer.pk%}">like</a></h1>
+                <a class="like" href="{% url 'questions:like' pk=answer.pk%}">like</a>
             {%endif%}
         {%endfor%}
     </ol>
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{form.as_p}}
+        <button type="submit">submit</button>
+    </form>
+    <a href="{%url 'tracks:lesson_view' pk=question.lesson.pk%}">back to lesson</a>
 </body>
 
 </html>

@@ -35,3 +35,21 @@ class reset_password_form (forms.ModelForm):
                 return cleaned_data
             else :
                 raise forms.ValidationError("passwords are not the same")
+
+class change_password_form (forms.Form):
+     old_password = forms.CharField(widget=forms.PasswordInput)
+     password1 = forms.CharField(widget=forms.PasswordInput)
+     password2 = forms.CharField(widget=forms.PasswordInput)
+
+     
+     def clean(self):
+        cleaned_data = super().clean()
+        first_password = cleaned_data.get('password1')
+        second_password = cleaned_data.get('password2')
+        if first_password and second_password:
+            if first_password == second_password:
+                return cleaned_data
+            else :
+                raise forms.ValidationError("passwords are not the same")
+
+

@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Title of the document</title>
+</head>
+
+<body>
+    <form method="POST">
+        {% csrf_token %}
+        {%for question in questions%}
+        <p>{{question.question}}</p>
+          <input type="radio" name={{question.name}} value="answer1"> {{question.answer1}}<br>
+          <input type="radio" name={{question.name}} value="answer2"> {{question.answer2}}<br>
+          <input type="radio" name={{question.name}} value="answer3"> {{question.answer3}}<br>
+          <input type="radio" name={{question.name}} value="answer4"> {{question.answer4}}<br>   
+        {%endfor%}
+        <input type="submit" value="Submit">
+        </form>    
+</body>
+
+</html>

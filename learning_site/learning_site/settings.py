@@ -138,3 +138,6 @@ EMAIL_PORT = 587
 
 
 LOGIN_REDIRECT_URL = 'home'
+
+#sessions properties
+

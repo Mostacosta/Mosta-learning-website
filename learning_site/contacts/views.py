@@ -1,5 +1,5 @@
 
-from .forms import user_form,profile_form,reset_password_form,reset_password_mail
+from .forms import user_form,profile_form,reset_password_form,reset_password_mail,change_password_form
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.contrib.auth import login, authenticate
@@ -10,6 +10,8 @@ from django.template.loader import render_to_string
 from .tokens import account_activation_token
 from django.contrib.auth.models import User
 from django.core.mail import EmailMessage
+from django.contrib.auth.hashers import check_password
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 def create_user (request):
@@ -29,6 +31,8 @@ def create_user (request):
             profile.user = user
             profile.save()
             current_site = get_current_site(request)
+            print(user.pk)
+            print(urlsafe_base64_encode(force_bytes(user.pk)))
             mail_subject = 'Activate your blog account.'
             message = render_to_string('contacts/acc_active_email.html', {
                 'user': user,
@@ -45,7 +49,7 @@ def create_user (request):
         else:
             print(userform.errors,profile_form.errors)
 
-    return render(request,'contacts/registration.html',{'user':userform,'profile':profileform})
+    return render(request,'contacts/register.html')
 
 def activate(request, uidb64, token):
     try:
@@ -107,3 +111,26 @@ def reset_password(request, uidb64, token):
 
     else:
         return HttpResponse('Activation link is invalid!')
+
+        
+@login_required
+def change_password (request):
+    form = change_password_form()
+
+    if request.method == 'POST':
+        form = change_password_form(request.POST)
+        if form.is_valid():
+            user = request.user
+            print(user.username)
+            old_password = request.POST['old_password']
+
+            if check_password(old_password,user.password):
+                user.password = request.POST['password1']
+                user.set_password(user.password)
+                user.save()
+                return HttpResponse('you have a new password nw .')
+            else:
+                return HttpResponse('the password is wrong .')
+
+
+    return render(request,'contacts/resetpassword.html',{'form':form})
