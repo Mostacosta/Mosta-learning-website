@@ -1,4 +1,3 @@
-
 from .forms import user_form,profile_form,reset_password_form,reset_password_mail,change_password_form
 from django.http import HttpResponse
 from django.shortcuts import render, redirect

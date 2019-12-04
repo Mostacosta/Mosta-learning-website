@@ -31,5 +31,7 @@ urlpatterns = [
     path("test",views.permissions_test),
     path('tracks',include('tracks.urls')),
     path('questions',include('questions.urls')),
-    
+    path('api/track',include('tracks.api.urls')),
+    path('api/user',include('contacts.api.urls')),
+    path('api/questions',include('questions.api.urls'))    
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
