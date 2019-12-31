@@ -1,134 +1,246 @@
 <!DOCTYPE html>
-{%load static%}
+{% load static %}
 <html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<!-- For IE -->
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-<head>
-  <title>Academics &mdash; Website by Colorlib</title>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+		<!-- For Resposive Device -->
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+		<title>Eskul - Responsive Bootstrap  Education HTML5 Template</title>
+
+		<!-- Favicon -->
+		<link rel="icon" type="image/png" sizes="56x56" href="{% static "images/fav-icon/icon.png"%}">
 
 
-  <link href="https://fonts.googleapis.com/css?family=Muli:300,400,700,900" rel="stylesheet">
-  <link rel="stylesheet" href="{%static "fonts/icomoon/style.css"%}">
+		<!-- Main style sheet -->
+		<link rel="stylesheet" type="text/css" href="{% static "css/style.css"%}">
+		<!-- responsive style sheet -->
+		<link rel="stylesheet" type="text/css" href="{% static "css/responsive.css"%}">
 
-  <link rel="stylesheet" href="{%static "css/bootstrap.min.css"%}">
-  <link rel="stylesheet" href="{%static "css/jquery-ui.css"%}">
-  <link rel="stylesheet" href="{%static "css/owl.carousel.min.css"%}">
-  <link rel="stylesheet" href="{%static "css/owl.theme.default.min.css"%}">
-  <link rel="stylesheet" href="{%static "css/owl.theme.default.min.css"%}">
 
-  <link rel="stylesheet" href="{%static "css/jquery.fancybox.min.css"%}">
+		<!-- Fix Internet Explorer ______________________________________-->
 
-  <link rel="stylesheet" href="{%static "css/bootstrap-datepicker.css"%}">
+		<!--[if lt IE 9]>
+			<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+			<script src="<% static "vendor/html5shiv.js"%>"></script>
+			<script src="{% static "vendor/respond.js"%}"></script>
+		<![endif]-->
+		{% block header %}
+		{% endblock header %}
+			
+	</head>
 
-  <link rel="stylesheet" href="{%static "fonts/flaticon/font/flaticon.css"%}">
+	<body>
+		<div class="main-page-wrapper">
 
-  <link rel="stylesheet" href="{%static "css/aos.css"%}">
-  <link href="{%static "css/jquery.mb.YTPlayer.min.css"%}" media="all" rel="stylesheet" type="text/css">
+			<!-- ===================================================
+				Loading Transition
+			==================================================== -->
+			<div id="loader-wrapper">
+				<div id="loader"></div>
+			</div>
 
-  <link rel="stylesheet" href="{%static "css/style.css"%}">
 
-  
 
-</head>
-<body data-spy="scroll" data-target=".site-navbar-target" data-offset="300">
-    <div class="site-wrap">
+			<!-- 
+			=============================================
+				Theme Header
+			============================================== 
+			-->
+			<header class="theme-menu-wrapper menu-style-two">
+				<div class="top-header">
+					<div class="container">
+						<ul class="float-left left-content">
+							<li><a href="#">(880) 9990007888</a></li>
+							<li><a href="#">Eskul@email.com</a></li>
+							<li>
+								<div class="bfh-selectbox bfh-languages" data-language="en_US" data-available="en_US,fr_CA,es_MX" data-flags="true"></div>
+							</li>
+						</ul>
+						{% if request.user.is_authenticated %}
+						<button type="submit" onclick="location.href='{% url 'logout' %}'" class="tran3s login float-right" data-toggle="modal" data-target=".signInModal"><i class="flaticon-lock"></i> Logout</button>
+						{% else %}
+						<button class="tran3s login float-right" data-toggle="modal" data-target=".signInModal"><i class="flaticon-lock"></i> login</button>
+						{% endif %}
+						
+					</div> <!-- /.container -->
+				</div> <!-- /.top-header -->
+				<div class="container">
+					<div class="header-wrapper clearfix">
+						<!-- Logo -->
+						<div class="logo float-left tran4s hidden-sm hidden-xs"><a href="index.html"><img src="{% static "images/logo/logo3.png"%}" alt="Logo"></a></div>
+						<!-- Logo -->
+						<div class="logo float-left tran4s hidden-md hidden-lg"><a href="index.html"><img src="{% static 'images/logo/logo4.png'%}" alt="Logo"></a></div>
 
-        <div class="site-mobile-menu site-navbar-target">
-          <div class="site-mobile-menu-header">
-            <div class="site-mobile-menu-close mt-3">
-              <span class="icon-close2 js-menu-toggle"></span>
-            </div>
-          </div>
-          <div class="site-mobile-menu-body"></div>
-        </div>
-    
-    
-        <div class="py-2 bg-light">
-          <div class="container">
-            <div class="row align-items-center">
-              <div class="col-lg-9 d-none d-lg-block">
-                <a href="#" class="small mr-3"><span class="icon-question-circle-o mr-2"></span> Have a questions?</a> 
-                <a href="#" class="small mr-3"><span class="icon-phone2 mr-2"></span> 10 20 123 456</a> 
-                <a href="#" class="small mr-3"><span class="icon-envelope-o mr-2"></span> info@mydomain.com</a> 
-              </div>
-              <div class="col-lg-3 text-right">
-                <a href="{%url 'login'%}" class="small mr-3"><span class="icon-unlock-alt"></span> Log In</a>
-                <a href="{%url 'contacts:signup'%}" class="small btn btn-primary px-4 py-2 rounded-0"><span class="icon-users"></span> Register</a>
-              </div>
-            </div>
-          </div>
-        </div>
-        <header class="site-navbar py-4 js-sticky-header site-navbar-target" role="banner">
-    
-          <div class="container">
-            <div class="d-flex align-items-center">
-              <div class="site-logo">
-                <a href="index.html" class="d-block">
-                  <img src="" alt="Image" class="img-fluid">
-                </a>
-              </div>
-              <div class="mr-auto">
-                <nav class="site-navigation position-relative text-right" role="navigation">
-                  <ul class="site-menu main-menu js-clone-nav mr-auto d-none d-lg-block">
-                    <li class="active">
-                      <a href="{% url 'home'%}" class="nav-link text-left">Home</a>
-                    </li>
-                    <li class="has-children">
-                      <a href="about.html" class="nav-link text-left">About Us</a>
-                      <ul class="dropdown">
-                        <li><a href="teachers.html">Our Teachers</a></li>
-                        <li><a href="about.html">Our School</a></li>
-                      </ul>
-                    </li>
-                    <li>
-                      <a href="admissions.html" class="nav-link text-left">Admissions</a>
-                    </li>
-                    <li>
-                      <a href="{%url 'tracks:track_list'%}" class="nav-link text-left">Tracks</a>
-                    </li>
-                    <li>
-                        <a href="contact.html" class="nav-link text-left">Contact</a>
-                      </li>
-                  </ul>                                                                                                                                                                                                                                                                                          </ul>
-                </nav>
-    
-              </div>
-              <div class="ml-auto">
-                <div class="social-wrap">
-                  <a href="#"><span class="icon-facebook"></span></a>
-                  <a href="#"><span class="icon-twitter"></span></a>
-                  <a href="#"><span class="icon-linkedin"></span></a>
-    
-                  <a href="#" class="d-inline-block d-lg-none site-menu-toggle js-menu-toggle text-black"><span
-                    class="icon-menu h3"></span></a>
-                </div>
-              </div>
-             
-            </div>
-          </div>
-    
-        </header>
-        {% block content %}{% endblock content %}
-        <div id="loader" class="show fullscreen"><svg class="circular" width="48px" height="48px"><circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/><circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#51be78"/></svg></div>
+						<div class="float-right header-widget">
+							<!-- Search Bar -->
+							<div class="search-option float-right">
+						   		<button class="search tran3s dropdown-toggle" id="searchDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-search" aria-hidden="true"></i></button>
+						   		<form action="#" class="p-color-bg dropdown-menu tran3s" aria-labelledby="searchDropdown">
+						   			<input type="text" placeholder="Search....">
+						   			<button class="s-bg-color tran3s"><i class="fa fa-search" aria-hidden="true"></i></button>
+						   		</form>
+						   </div> <!-- /.search-option -->
+						   <!-- Curt Button -->
+							<button class="cart-button float-right">
+								<i class="icon flaticon-online-shopping-cart"></i>
+							</button>
+						</div>
 
-    <script src="{%static "js/jquery-3.3.1.min.js"%}"></script>
-    <script src="{%static "js/jquery-migrate-3.0.1.min.js"%}"></script>
-    <script src="{%static "js/jquery-ui.js"%}"></script>
-    <script src="{%static "js/popper.min.js"%}"></script>
-    <script src="{%static "js/bootstrap.min.js"%}"></script>
-    <script src="{%static "js/owl.carousel.min.js"%}"></script>
-    <script src="{%static "js/jquery.stellar.min.js"%}"></script>
-    <script src="{%static "js/jquery.countdown.min.js"%}"></script>
-    <script src="{%static "js/bootstrap-datepicker.min.js"%}"></script>
-    <script src="{%static "js/jquery.easing.1.3.js"%}"></script>
-    <script src="{%static "js/aos.js"%}"></script>
-    <script src="{%static "js/jquery.fancybox.min.js"%}"></script>
-    <script src="{%static "js/jquery.sticky.js"%}"></script>
-    <script src="{%static "js/jquery.mb.YTPlayer.min.js"%}"></script>
+						<!-- ============================ Theme Menu ========================= -->
+						<nav class="theme-main-menu float-right navbar" id="mega-menu-wrapper">
+							<!-- Brand and toggle get grouped for better mobile display -->
+						   <div class="navbar-header">
+						     <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse-1" aria-expanded="false">
+						       <span class="sr-only">Toggle navigation</span>
+						       <span class="icon-bar"></span>
+						       <span class="icon-bar"></span>
+						       <span class="icon-bar"></span>
+						     </button>
+						   </div>
+						   <!-- Collect the nav links, forms, and other content for toggling -->
+						   <div class="collapse navbar-collapse" id="navbar-collapse-1">
+								<ul class="nav">
+									<li class="dropdown-holder menu-list"><a href="index.html" class="tran3s">Home</a>
+										<ul class="sub-menu">
+											<li><a href="index.html">Home version one</a></li>
+											<li><a href="index-2.html">Home version Two</a></li>
+										</ul>
+									</li>
+									<li class="dropdown-holder menu-list"><a href="#" class="tran3s">Course</a>
+										<ul class="sub-menu">
+											<li><a href="course-grid.html">Course grid</a></li>
+											<li><a href="course-list.html">Course List</a></li>
+											<li><a href="course-details.html">Course Details</a></li>
+											<li class="dropdown-holder"><a href="#">Third Level menu</a>
+												<ul class="second-sub-menu">
+													<li><a href="#">menu one</a></li>
+													<li><a href="#">menu two</a></li>
+												</ul>
+											</li>
+										</ul>
+									</li>
+									<li class="dropdown-holder menu-list"><a href="#" class="tran3s">Pages</a>
+										<ul class="sub-menu width-half">
+											<li><a href="about-us.html">About Us</a></li>
+											<li><a href="our-teacher.html">Our teacher</a></li>
+											<li><a href="teachers-profile.html">teachers profile</a></li>
+											<li><a href="shop.html">Shop page</a></li>
+											<li><a href="shop-details.html">Shop Details</a></li>
+											<li><a href="portfolio-3-column.html">portfolio 3 column</a></li>
+											<li><a href="portfolio-4-column.html">portfolio 4 column</a></li>
+											<li><a href="pricing-plan.html">Pricing Plan</a></li>
+											<li><a href="faq.html">Faq Page</a></li>
+											<li><a href="404.html">Error Page</a></li>
+											<li><a href="sign-up.html">Registration</a></li>
+											<li class="dropdown-holder"><a href="#">Third Level menu</a>
+												<ul class="second-sub-menu">
+													<li><a href="#">menu one</a></li>
+													<li><a href="#">menu two</a></li>
+												</ul>
+											</li>
+										</ul>
+									</li>
+									<li class="dropdown-holder menu-list"><a href="#" class="tran3s">Event</a>
+										<ul class="sub-menu">
+											<li><a href="event-list.html">Event List</a></li>
+											<li><a href="event-grid.html">Event Grid</a></li>
+											<li><a href="event-details.html">Event Single</a></li>
+										</ul>
+									</li>
+									<li class="dropdown-holder menu-list"><a href="#" class="tran3s">Blog</a>
+										<ul class="sub-menu">
+											<li><a href="blog-grid.html">Blog grid</a></li>
+											<li><a href="blog-list.html">Blog List</a></li>
+											<li><a href="blog-details.html">blog Details</a></li>
+										</ul>
+									</li>
+									<li><a href="contact-us.html" class="tran3s">Contact Us</a></li>
+								</ul>
+						   </div><!-- /.navbar-collapse -->
+						</nav> <!-- /.theme-main-menu -->
+					</div> <!-- /.header-wrapper -->
+				</div>
+			</header> <!-- /.theme-menu-wrapper -->
 
-    <script src="{%static "js/main.js"%}"></script>
+      {% block content %}
+      {% endblock content %}
 
-    {% block javascript %}{% endblock %}
-</body>
 
+<!-- Sign-in Modal -->
+			<div class="modal fade signInModal theme-modal-box" role="dialog">
+				<div class="modal-dialog">
+				    <!-- Modal content-->
+				    <div class="modal-content">
+					    <div class="modal-body">
+					        <h3>Login with Social Networks</h3>
+					        <ul class="clearfix">
+					        	<li class="float-left"><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i> facebook</a></li>
+					        	<li class="float-left"><a href="#"><i class="fa fa-google-plus" aria-hidden="true"></i> Google</a></li>
+					        	<li class="float-left"><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i> Twitter</a></li>
+					        	<li class="float-left"><a href="#"><i class="fa fa-linkedin" aria-hidden="true"></i> Linkedin</a></li>
+					        </ul>
+					        <form action="{% url 'login'%}" method="post" > {% csrf_token %}
+					        	<h3>Login Site Account</h3>
+					        	<div class="wrapper">
+					        		<input type="text" placeholder="Username" name="username">
+					        		<input type="password" placeholder="Password" name="password">
+					        		<ul class="clearfix">
+										<li class="float-left">
+											<input type="checkbox" id="remember">
+											<label for="remember">Remember Me</label>
+										</li>
+										<li class="float-right"><a href="{% url 'contacts:resetmail' %}" class="s-color">Lost Your Password?</a></li>
+									</ul>
+									<input type="submit" class="p-bg-color hvr-trim">Login</input>
+					        	</div>
+					        </form>
+					        <div><a href="{% url 'contacts:signup' %}" class="p-color tran3s">Not an account?? Sign Up</a></div>
+					    </div> <!-- /.modal-body -->
+				    </div> <!-- /.modal-content -->
+				</div> <!-- /.modal-dialog -->
+			</div> <!-- /.signInModal -->
+
+
+
+			<!-- Js File_________________________________ -->
+
+		<!-- j Query -->
+		<script type="text/javascript" src="{% static "vendor/jquery.2.2.3.min.js"%}"></script>
+		<!-- Bootstrap Select JS -->
+		<script type="text/javascript" src="{% static "vendor/bootstrap-select/dist/js/bootstrap-select.js"%}"></script>
+
+		<!-- Bootstrap JS -->
+		<script type="text/javascript" src="{% static "vendor/bootstrap/bootstrap.min.js"%}"></script>
+		<!-- BootstrapFormHelpers-master -->
+		<script type="text/javascript" src="{% static "vendor/BootstrapFormHelpers-master/dist/js/bootstrap-formhelpers.min.js"%}"></script>
+
+		<!-- Vendor js _________ -->
+		<!-- Camera Slider -->
+		<script type='text/javascript' src='{% static 'vendor/Camera-master/scripts/jquery.mobile.customized.min.js'%}'></script>
+	    <script type='text/javascript' src='{% static "vendor/Camera-master/scripts/jquery.easing.1.3.js"%}'></script> 
+	    <script type='text/javascript' src='{% static "vendor/Camera-master/scripts/camera.min.js"%}'></script>
+	    <!-- Mega menu  -->
+		<script type="text/javascript" src="{% static "vendor/bootstrap-mega-menu/js/menu.js"%}"></script>
+		
+		<!-- WOW js -->
+		<script type="text/javascript" src="{% static "vendor/WOW-master/dist/wow.min.js"%}"></script>
+		<!-- owl.carousel -->
+		<script type="text/javascript" src="{% static "vendor/owl-carousel/owl.carousel.min.js"%}"></script>
+		<!-- js count to -->
+		<script type="text/javascript" src="{% static "vendor/Counter/jquery.counterup.min.js"%}"></script>
+		<script src="{% static "vendor/Counter/jquery.waypoints.min.js"%}"></script>
+		<!-- partical Js -->
+		<script type="text/javascript" src="{% static "vendor/particles.js-master/particles.min.js"%}"></script>
+		<script type="text/javascript" src="{% static "vendor/particles.js-master/demo/js/lib/stats.js"%}"></script>
+		<script type="text/javascript" src="{% static "vendor/particles.js-master/demo/js/app.js"%}"></script>
+
+		<!-- Theme js -->
+		<script type="text/javascript" src="{% static "js/theme.js"%}"></script>
+
+		</div> <!-- /.main-page-wrapper -->
+	</body>
+</html>

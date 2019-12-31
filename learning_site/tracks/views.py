@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.http import HttpResponse
+from django.http import HttpResponse,JsonResponse
 from .models import track,course,lesson,exam,exam_result
 from questions.models import question ,answer
 from questions.forms import question_form
@@ -10,12 +10,17 @@ from django.utils import timezone
 # Create your views here.
 def track_list(request):
     tracks = track.objects.all()
-    return render (request,'tracks/track_list.html',{"tracks":tracks})
+    return render (request,'tracks/track-list.html',{"tracks":tracks})
 
 def course_list(request,pk):
     my_track = track.objects.get(pk=pk)
     courses = course.objects.filter(track=my_track)
-    return render (request,'tracks/course_list.html',{"courses":courses,"track":my_track})
+    lessons_ = []
+    for course_ in courses:
+        lessons = lesson.objects.filter(course=course_)
+        lessons_.append(lessons)
+    courses = zip(courses,lessons_)
+    return render (request,'tracks/course-details.html',{"courses":courses,"track":my_track})
 
 def lesson_list(request,pk):
     my_course = course.objects.get(pk=pk)
@@ -25,16 +30,27 @@ def lesson_list(request,pk):
 def lesson_view (request,pk):
     form = question_form()
     lesson_ = lesson.objects.get(pk=pk)
-    lessons_ = lesson.objects.filter(course=lesson_.course)
     questions = question.objects.filter(lesson=lesson_)
     answers = []
     for question_ in questions :
         answers.append(answer.objects.filter(question=question_))
     zip_list = zip (questions,answers)
+    if request.method == "POST":
+        form = question_form(request.POST,request.FILES)
+        if form.is_valid():
+            ques_=form.save(commit=False)
+            ques_.user = request.user
+            ques_.lesson=lesson_
+            form.save()
+    return render (request,"tracks/lesson_questions.html",{"zip":zip_list,"form":form})
+
+def lesson_watch (request,pk):
+    lesson_ = lesson.objects.get(pk=pk)
     if request.user not in lesson_.watching_users.all():
         lesson_.watching_users.add(request.user)
         lesson_.save()
-    return render (request,'tracks/lesson.html',{"lesson":lesson_,'zip':zip_list,"form":form,"lessons":lessons_})
+    return HttpResponse("watched")
+
 
 def exam_view (request,pk):
     course_ = course.objects.get(pk=pk)

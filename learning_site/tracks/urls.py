@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import  track_list,lesson_list,course_list,lesson_view,exam_view
+from .views import  track_list,lesson_list,course_list,lesson_view,exam_view,lesson_watch
 
 app_name = 'tracks'
 
@@ -9,5 +9,6 @@ urlpatterns = [
   path('/lesson/<int:pk>',lesson_list,name = 'lesson_list'),
   path('/lesson_details/<int:pk>',lesson_view,name='lesson_view'),
   path('/exam/<int:pk>',exam_view,name='exam_view'),
+   path('/lessonwatch/<int:pk>',lesson_watch,name='lesson_watch')
 
 ]

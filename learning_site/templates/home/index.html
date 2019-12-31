@@ -1,130 +1,810 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <title>Bootstrap Example</title>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
-  <style>
-    /* Remove the navbar's default margin-bottom and rounded borders */ 
-    .navbar {
-      margin-bottom: 0;
-      border-radius: 0;
-    }
-    
-    /* Add a gray background color and some padding to the footer */
-    footer {
-      background-color: #f2f2f2;
-      padding: 25px;
-    }
-    
-  .carousel-inner img {
-      width: 100%; /* Set width to 100% */
-      margin: auto;
-      min-height:200px;
-  }
+{% extends 'base.html' %}
+{% block content %}
 
-  /* Hide the carousel text when the screen is less than 600 pixels wide */
-  @media (max-width: 600px) {
-    .carousel-caption {
-      display: none; 
-    }
-  }
-  </style>
-</head>
-<body>
+			<!-- 
+			=============================================
+				Theme Main Banner
+			============================================== 
+			-->
+			{% load static %}
+			<div id="theme-main-banner" class="banner-two">
+				<div data-src="{% static "images/home/slide-2.jpg"%}">
+					<div class="camera_caption">
+						<div class="container">
+							<h3 class="wow fadeInUp animated">Eskul is an online platform</h3>
+							<h1 class="wow fadeInUp animated" data-wow-delay="0.2s">Designed to <span class="s-color">Make Learning</span></h1>
+							<a href="course-2-column.html" class="tran3s wow fadeInLeft animated banner-button" data-wow-delay="0.3s">Start Learn Now</a>
+							<a href="course-2-column.html" class="tran3s wow fadeInRight animated button-one banner-button hvr-trim" data-wow-delay="0.3s">Purchase now</a>
+						</div> <!-- /.container -->
+					</div> <!-- /.camera_caption -->
+				</div>
+				<div data-src="{% static "images/home/slide-1.jpg"%}">
+					<div class="camera_caption">
+						<div class="container">
+							<h3 class="wow fadeInUp animated">Eskul is an online platform</h3>
+							<h1 class="wow fadeInUp animated" data-wow-delay="0.2s">Designed to <span class="s-color">Make Learning</span></h1>
+							<a href="course-2-column.html" class="tran3s wow fadeInLeft animated banner-button" data-wow-delay="0.3s">Start Learn Now</a>
+							<a href="course-2-column.html" class="tran3s wow fadeInRight animated button-one banner-button hvr-trim" data-wow-delay="0.3s">Purchase now</a>
+						</div> <!-- /.container -->
+					</div> <!-- /.camera_caption -->
+				</div>
+			</div> <!-- /#theme-main-banner -->
 
-<nav class="navbar navbar-inverse">
-  <div class="container-fluid">
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>                        
-      </button>
-      <a class="navbar-brand" href="#">Logo</a>
-    </div>
-    <div class="collapse navbar-collapse" id="myNavbar">
-      <ul class="nav navbar-nav">
-        <li class="active"><a href="{%url 'home'%}">Home</a></li>
-        <li><a href="{%url 'tracks:track_list'%}">Tracks</a></li>
-        <li><a href="#">Projects</a></li>
-        <li><a href="#">About us</a></li>
-      </ul>
-      <ul class="nav navbar-nav navbar-right">
-        {% if user.is_authenticated %}
-        <li><a href="#"><span class="glyphicon">      </span>classroom</a></li>
-        <li><a href="{%url 'logout'%}"><span class="glyphicon">      </span>logout</a></li>
-        {% else %}
-        {{user.username}}
-        <li><a href="{%url 'login'%}"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
-        <li><a href="{%url 'contacts:signup'%}"><span class="glyphicon glyphicon-log-in"></span> Register</a></li>
-        {% endif %}
-      </ul>
-    </div>
-  </div>
-</nav>
 
-<div id="myCarousel" class="carousel slide" data-ride="carousel">
-    <!-- Indicators -->
-    <ol class="carousel-indicators">
-      <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-      <li data-target="#myCarousel" data-slide-to="1"></li>
-    </ol>
 
-    <!-- Wrapper for slides -->
-    <div class="carousel-inner" role="listbox">
-      <div class="item active">
-        <img src="https://placehold.it/1200x400?text=IMAGE" alt="Imagee">
-        <div class="carousel-caption">
-          <h3>Sell $</h3>
-          <p>Money Money.</p>
-        </div>      
-      </div>
+			<!-- 
+			=============================================
+				Popular Course 
+			============================================== 
+			-->
+			<div class="popular-course">
+				<div class="container">
+					<div class="theme-title">
+						<h6>Featured Course</h6>
+						<h2>Populer Course</h2>
+						<a href="course-grid.html" class="tran3s">See All Course</a>
+					</div> <!-- /.theme-title -->
 
-      <div class="item">
-        <img src="https://placehold.it/1200x400?text=Another Image Maybe" alt="Image">
-        <div class="carousel-caption">
-          <h3>More Sell $</h3>
-          <p>Lorem ipsum...</p>
-        </div>      
-      </div>
-    </div>
+					<div class="row">
+						<div class="col-md-4 col-xs-6 wow fadeInLeft">
+							<div class="single-course">
+								<div class="image-box"><img src="images/course/1.jpg" alt=""></div>
+								<div class="text">
+									<div class="image"><img src="images/course/4.jpg" alt=""></div>
+									<div class="name clearfix">
+										<h6 class="float-left">Jemmi Koli</h6>
+										<span class="p-bg-color float-right">Free</span>
+									</div>
+									<h5><a href="course-details.html" class="tran3s">Angular 2 Essential Training JavaScript Framework</a></h5>
+									<p>Lorem ipsum dolor sit amet, duo vide etiam periculis ei, ius in lorem iuvaret. Cum nemro assum copiosae despite...</p>
+									<ul class="clearfix">
+										<li class="float-left">
+											<i class="flaticon-people"></i>
+											<a href="#" class="tran3s">2,680</a>
+										</li>
+										<li class="float-left">
+											<i class="flaticon-comments"></i>
+											<a href="#" class="tran3s">13</a>
+										</li>
+										<li class="float-right">
+											<i class="flaticon-heart"></i>
+											<a href="#" class="tran3s">3</a>
+										</li>
+									</ul>
+								</div>
+							</div> <!-- /.single-course -->
+						</div> <!-- /.col- -->
+						<div class="col-md-4 col-xs-6 wow fadeInUp">
+							<div class="single-course">
+								<div class="image-box"><img src="images/course/2.jpg" alt=""></div>
+								<div class="text">
+									<div class="image"><img src="images/course/5.jpg" alt=""></div>
+									<div class="name clearfix">
+										<h6 class="float-left">Abdus Salam</h6>
+										<strong class="s-color float-right">$79<sup>.99</sup></strong>
+									</div>
+									<h5><a href="course-details.html" class="tran3s">Angular 2 Essential Training JavaScript Framework</a></h5>
+									<p>Lorem ipsum dolor sit amet, duo vide etiam periculis ei, ius in lorem iuvaret. Cum nemro assum copiosae despite...</p>
+									<ul class="clearfix">
+										<li class="float-left">
+											<i class="flaticon-people"></i>
+											<a href="#" class="tran3s">2,680</a>
+										</li>
+										<li class="float-left">
+											<i class="flaticon-comments"></i>
+											<a href="#" class="tran3s">13</a>
+										</li>
+										<li class="float-right">
+											<i class="flaticon-heart"></i>
+											<a href="#" class="tran3s">3</a>
+										</li>
+									</ul>
+								</div>
+							</div> <!-- /.single-course -->
+						</div> <!-- /.col- -->
+						<div class="col-md-4 hidden-sm col-xs-6 wow fadeInRight">
+							<div class="single-course">
+								<div class="image-box"><img src="images/course/3.jpg" alt=""></div>
+								<div class="text">
+									<div class="image"><img src="images/course/6.jpg" alt=""></div>
+									<div class="name clearfix">
+										<h6 class="float-left">Jhon Doe</h6>
+										<span class="p-bg-color float-right">Free</span>
+									</div>
+									<h5><a href="course-details.html" class="tran3s">Angular 2 Essential Training JavaScript Framework</a></h5>
+									<p>Lorem ipsum dolor sit amet, duo vide etiam periculis ei, ius in lorem iuvaret. Cum nemro assum copiosae despite...</p>
+									<ul class="clearfix">
+										<li class="float-left">
+											<i class="flaticon-people"></i>
+											<a href="#" class="tran3s">2,680</a>
+										</li>
+										<li class="float-left">
+											<i class="flaticon-comments"></i>
+											<a href="#" class="tran3s">13</a>
+										</li>
+										<li class="float-right">
+											<i class="flaticon-heart"></i>
+											<a href="#" class="tran3s">3</a>
+										</li>
+									</ul>
+								</div>
+							</div> <!-- /.single-course -->
+						</div> <!-- /.col- -->
+					</div> <!-- /.row -->
+				</div> <!-- /.container -->
+			</div> <!-- /.popular-course -->
 
-    <!-- Left and right controls -->
-    <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
-      <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-      <span class="sr-only">Previous</span>
-    </a>
-    <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
-      <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-      <span class="sr-only">Next</span>
-    </a>
-</div>
-  
-<div class="container text-center">    
-  <h3>What We Do</h3><br>
-  <div class="row">
-    <div class="col-sm-4">
-      <img src="https://placehold.it/150x80?text=IMAGE" class="img-responsive" style="width:100%" alt="Image">
-      <p>Current Project</p>
-    </div>
-    <div class="col-sm-4"> 
-      <img src="https://placehold.it/150x80?text=IMAGE" class="img-responsive" style="width:100%" alt="Image">
-      <p>Project 2</p>    
-    </div>
-    <div class="col-sm-4"> 
-      <img src="https://placehold.it/150x80?text=IMAGE" class="img-responsive" style="width:100%" alt="Image">
-      <p>Project 2</p>    
-    </div>
-  </div>
-</div><br>
 
-<footer class="container-fluid text-center">
-  <p>Footer Text</p>
-</footer>
+			<!-- 
+			=============================================
+				Registration Banner  
+			============================================== 
+			-->
+			<div class="registration-banner">
+				<div class="opacity">
+					<div class="container">
+						<div class="row">
+							<div class="col-md-5 col-xs-12">
+								<div class="registration-form">
+									<form action="#">
+										<h2>Register Now</h2>
+										<p>Create  your account and browse thousand of courses!!</p>
+										<div class="form-wrapper">
+											<h6>Your Full Name</h6>
+											<input type="text" placeholder="Your Name">
+											<h6>Your EMail</h6>
+											<input type="email" placeholder="sample@email.com">
+											<h6>Mobile Number</h6>
+											<input type="text" placeholder="+880 854 875 971">
+											<button class="tran3s hvr-trim">SIGN UP NOW!!</button>
+										</div> <!-- /.form-wrapper -->
+									</form>
+								</div> <!-- /.registration-form -->
+							</div>
 
-</body>
-</html>
+							<div class="col-md-7 col-xs-12">
+								<div class="text-wrapper">
+									<h2>We Have More <br>Than <span class="p-color">28,690+Student</span> Currently Useing Eskul</h2>
+
+									<ul class="clearfix">
+										<li class="float-left">
+											<div class="single-box">
+						        				<h3><span class="counter">8,759</span></h3>
+						        				<p>Currently Use</p>
+						        			</div> <!-- /.single-box -->
+										</li>
+										<li class="float-left">
+											<div class="single-box">
+						        				<h3><span class="counter">42</span>M</h3>
+						        				<p>Total Students</p>
+						        			</div> <!-- /.single-box -->
+										</li>
+										<li class="float-left">
+											<div class="single-box">
+						        				<h3><span class="counter">70,593</span></h3>
+						        				<p>Finished Course</p>
+						        			</div> <!-- /.single-box -->
+										</li>
+									</ul>
+								</div>
+							</div>
+						</div> <!-- /.row -->
+					</div> <!-- /.container -->
+				</div> <!-- /.opacity -->
+			</div> <!-- /.registration-banner -->
+
+
+			
+			<!-- 
+			=============================================
+				Our Course Style Two
+			============================================== 
+			-->
+			<div class="our-course-styleTwo">
+				<div class="container">
+					<div class="theme-title text-center">
+						<h2>Our Courses</h2>
+						<p>Other technological advances made during the Paleolithic era were clothing and shelter</p>
+					</div> <!-- /.theme-title -->
+					<div class="row">
+						<div class="col-md-4 col-xs-6">
+							<div class="single-course">
+								<div class="image">
+									<img src="images/course/7.jpg" alt="">
+									<div class="opacity">
+										<h5><a href="course-details.html" class="tran3s">Adobe <br>Photoshop</a></h5>
+										<p>Other technological advances made during the Paleolithic era were</p>
+									</div> <!-- /.opacity -->
+								</div> <!-- /.image -->
+							</div> <!-- /.single-course -->
+						</div> <!-- /.col- -->
+						<div class="col-md-4 col-xs-6">
+							<div class="single-course">
+								<div class="image">
+									<img src="images/course/8.jpg" alt="">
+									<div class="opacity">
+										<h5><a href="course-details.html" class="tran3s">Design &amp; <br>Development</a></h5>
+										<p>Other technological advances made during the Paleolithic era were</p>
+									</div> <!-- /.opacity -->
+								</div> <!-- /.image -->
+							</div> <!-- /.single-course -->
+						</div> <!-- /.col- -->
+						<div class="col-md-4 col-xs-6">
+							<div class="single-course">
+								<div class="image">
+									<img src="images/course/9.jpg" alt="">
+									<div class="opacity">
+										<h5><a href="course-details.html" class="tran3s">IOS &amp; Android <br>Apps Development</a></h5>
+										<p>Other technological advances made during the Paleolithic era were</p>
+									</div> <!-- /.opacity -->
+								</div> <!-- /.image -->
+							</div> <!-- /.single-course -->
+						</div> <!-- /.col- -->
+						<div class="col-md-4 col-xs-6">
+							<div class="single-course">
+								<div class="image">
+									<img src="images/course/10.jpg" alt="">
+									<div class="opacity">
+										<h5><a href="course-details.html" class="tran3s">Softwear <br>Development</a></h5>
+										<p>Other technological advances made during the Paleolithic era were</p>
+									</div> <!-- /.opacity -->
+								</div> <!-- /.image -->
+							</div> <!-- /.single-course -->
+						</div> <!-- /.col- -->
+						<div class="col-md-4 col-xs-6">
+							<div class="single-course">
+								<div class="image">
+									<img src="images/course/11.jpg" alt="">
+									<div class="opacity">
+										<h5><a href="course-details.html" class="tran3s">Online &amp; Social <br>Markting</a></h5>
+										<p>Other technological advances made during the Paleolithic era were</p>
+									</div> <!-- /.opacity -->
+								</div> <!-- /.image -->
+							</div> <!-- /.single-course -->
+						</div> <!-- /.col- -->
+						<div class="col-md-4 col-xs-6">
+							<div class="single-course">
+								<div class="image">
+									<img src="images/course/12.jpg" alt="">
+									<div class="opacity">
+										<h5><a href="course-details.html" class="tran3s">Video &amp; Animation <br>Development</a></h5>
+										<p>Other technological advances made during the Paleolithic era were</p>
+									</div> <!-- /.opacity -->
+								</div> <!-- /.image -->
+							</div> <!-- /.single-course -->
+						</div> <!-- /.col- -->
+					</div> <!-- /.row -->
+				</div> <!-- /.container -->
+			</div> <!-- /.our-course-styleTwo -->
+
+
+			<!-- 
+			=============================================
+				Theme Counter Section
+			============================================== 
+			-->
+			<div class="theme-counter">
+				<div class="count-particles">
+  					<span class="js-count-particles">--</span>
+				</div>
+				<div id="particles-js"></div>
+				<div class="opacity">
+					<div class="container">
+						<div class="row">
+							<div class="col-sm-3 col-xs-6">
+								<h3><span class="counter">85,873</span>+</h3>
+								<p>Students</p>
+							</div>
+							<div class="col-sm-3 col-xs-6">
+								<h3><span class="counter">468</span>+</h3>
+								<p>Courses</p>
+							</div>
+							<div class="col-sm-3 col-xs-6">
+								<h3><span class="counter">1,729</span>+</h3>
+								<p>Projects</p>
+							</div>
+							<div class="col-sm-3 col-xs-6">
+								<h3><span class="counter">2,560</span>+</h3>
+								<p>Ratings</p>
+							</div>
+						</div>
+					</div> <!-- /.container -->
+				</div> <!-- /.opacity -->
+			</div> <!-- /.theme-counter -->
+			
+
+			<!-- 
+			=============================================
+				Our Instructors
+			============================================== 
+			-->
+			<div class="our-instructor">
+				<div class="container">
+					<div class="theme-title text-center">
+						<h2>Our Instructors</h2>
+						<p>Other technological advances made during the Paleolithic era were clothing and </p>
+					</div> <!-- /.theme-title -->
+
+					<div class="row">
+						<div class="instructor-slider">
+							<div class="item">
+								<div class="single-member">
+									<div class="image">
+										<img src="images/team/1.jpg" alt="">
+										<div class="opacity tran4s">
+											<ul>
+									        	<li><a href="#" class="tran3s"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
+									        	<li><a href="#" class="tran3s"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
+									        	<li><a href="#" class="tran3s"><i class="fa fa-linkedin" aria-hidden="true"></i></a></li>
+									        </ul>
+										</div> <!-- /.image -->
+									</div>
+									<h6><a href="teachers-profile.html" class="tran3s">Jubayer Hasan</a></h6>
+									<p>Web Design &amp; Developer</p>
+								</div> <!-- /.single-member -->
+							</div> <!-- /.col- -->
+							<div class="item">
+								<div class="single-member">
+									<div class="image">
+										<img src="images/team/2.jpg" alt="">
+										<div class="opacity tran4s">
+											<ul>
+									        	<li><a href="#" class="tran3s"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
+									        	<li><a href="#" class="tran3s"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
+									        	<li><a href="#" class="tran3s"><i class="fa fa-linkedin" aria-hidden="true"></i></a></li>
+									        </ul>
+										</div> <!-- /.image -->
+									</div>
+									<h6><a href="teachers-profile.html" class="tran3s">Solayman Mi.</a></h6>
+									<p>Senior Designer</p>
+								</div> <!-- /.single-member -->
+							</div> <!-- /.col- -->
+							<div class="item">
+								<div class="single-member">
+									<div class="image">
+										<img src="images/team/3.jpg" alt="">
+										<div class="opacity tran4s">
+											<ul>
+									        	<li><a href="#" class="tran3s"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
+									        	<li><a href="#" class="tran3s"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
+									        	<li><a href="#" class="tran3s"><i class="fa fa-linkedin" aria-hidden="true"></i></a></li>
+									        </ul>
+										</div> <!-- /.image -->
+									</div>
+									<h6><a href="teachers-profile.html" class="tran3s">Lopa Murai</a></h6>
+									<p>Photographer</p>
+								</div> <!-- /.single-member -->
+							</div> <!-- /.col- -->
+							<div class="item">
+								<div class="single-member">
+									<div class="image">
+										<img src="images/team/4.jpg" alt="">
+										<div class="opacity tran4s">
+											<ul>
+									        	<li><a href="#" class="tran3s"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
+									        	<li><a href="#" class="tran3s"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
+									        	<li><a href="#" class="tran3s"><i class="fa fa-linkedin" aria-hidden="true"></i></a></li>
+									        </ul>
+										</div> <!-- /.image -->
+									</div>
+									<h6><a href="teachers-profile.html" class="tran3s">Hasan Masud</a></h6>
+									<p>TV Artist</p>
+								</div> <!-- /.single-member -->
+							</div> <!-- /.col- -->
+							<div class="item">
+								<div class="single-member">
+									<div class="image">
+										<img src="images/team/5.jpg" alt="">
+										<div class="opacity tran4s">
+											<ul>
+									        	<li><a href="#" class="tran3s"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
+									        	<li><a href="#" class="tran3s"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
+									        	<li><a href="#" class="tran3s"><i class="fa fa-linkedin" aria-hidden="true"></i></a></li>
+									        </ul>
+										</div> <!-- /.image -->
+									</div>
+									<h6><a href="teachers-profile.html" class="tran3s">Suraiya Khatun</a></h6>
+									<p>Art &amp; Illustrator Expert</p>
+								</div> <!-- /.single-member -->
+							</div> <!-- /.col- -->
+							<div class="item">
+								<div class="single-member">
+									<div class="image">
+										<img src="images/team/6.jpg" alt="">
+										<div class="opacity tran4s">
+											<ul>
+									        	<li><a href="#" class="tran3s"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
+									        	<li><a href="#" class="tran3s"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
+									        	<li><a href="#" class="tran3s"><i class="fa fa-linkedin" aria-hidden="true"></i></a></li>
+									        </ul>
+										</div> <!-- /.image -->
+									</div>
+									<h6><a href="teachers-profile.html" class="tran3s">Abdus Salam</a></h6>
+									<p>UI/UX Desginer at Unify</p>
+								</div> <!-- /.single-member -->
+							</div> <!-- /.col- -->
+							<div class="item">
+								<div class="single-member">
+									<div class="image">
+										<img src="images/team/7.jpg" alt="">
+										<div class="opacity tran4s">
+											<ul>
+									        	<li><a href="#" class="tran3s"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
+									        	<li><a href="#" class="tran3s"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
+									        	<li><a href="#" class="tran3s"><i class="fa fa-linkedin" aria-hidden="true"></i></a></li>
+									        </ul>
+										</div> <!-- /.image -->
+									</div>
+									<h6><a href="teachers-profile.html" class="tran3s">Sayfur Rahman</a></h6>
+									<p>Front-End Developer</p>
+								</div> <!-- /.single-member -->
+							</div> <!-- /.col- -->
+							<div class="item">
+								<div class="single-member">
+									<div class="image">
+										<img src="images/team/8.jpg" alt="">
+										<div class="opacity tran4s">
+											<ul>
+									        	<li><a href="#" class="tran3s"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
+									        	<li><a href="#" class="tran3s"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
+									        	<li><a href="#" class="tran3s"><i class="fa fa-linkedin" aria-hidden="true"></i></a></li>
+									        </ul>
+										</div> <!-- /.image -->
+									</div>
+									<h6><a href="teachers-profile.html" class="tran3s">Jhon Doe</a></h6>
+									<p>Marketing Expert</p>
+								</div> <!-- /.single-member -->
+							</div> <!-- /.col- -->
+							<div class="item">
+								<div class="single-member">
+									<div class="image">
+										<img src="images/team/5.jpg" alt="">
+										<div class="opacity tran4s">
+											<ul>
+									        	<li><a href="#" class="tran3s"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
+									        	<li><a href="#" class="tran3s"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
+									        	<li><a href="#" class="tran3s"><i class="fa fa-linkedin" aria-hidden="true"></i></a></li>
+									        </ul>
+										</div> <!-- /.image -->
+									</div>
+									<h6><a href="teachers-profile.html" class="tran3s">Suraiya Khatun</a></h6>
+									<p>Art &amp; Illustrator Expert</p>
+								</div> <!-- /.single-member -->
+							</div> <!-- /.col- -->
+						</div> <!-- /.instructor-slider -->
+					</div> <!-- /.row -->
+				</div> <!-- /.container -->
+			</div> <!-- /.our-instructor -->
+			
+
+
+			<!-- 
+			=============================================
+				Testimonial Style Two
+			============================================== 
+			-->
+			<div class="testimonial-styletwo">
+				<div class="container">
+					<div class="row">
+						<div class="col-md-7 col-xs-12 float-right">
+							<div class="wrapper">
+								<div class="theme-title">
+									<h2>Client Feedback</h2>
+								</div> <!-- /.theme-title -->
+
+								<div id="testimonial-carousel-two" class="carousel slide" data-ride="carousel" data-interval="500000">
+									<!-- Indicators -->
+									<ol class="carousel-indicators">
+										<li data-target="#testimonial-carousel-two" data-slide-to="0" class="active tran3s" title="Jenna Simpson"><img src="images/home/10.jpg" alt=""></li>
+										<li data-target="#testimonial-carousel-two" data-slide-to="1" class="tran3s" title="Abdus Salam"><img src="images/home/11.jpg" alt=""></li>
+										<li data-target="#testimonial-carousel-two" data-slide-to="2" class="tran3s" title="Solayman Mi."><img src="images/home/12.jpg" alt=""></li>
+										<li data-target="#testimonial-carousel-two" data-slide-to="3" class="tran3s" title="Giyas Uddin"><img src="images/home/13.jpg" alt=""></li>
+										<li data-target="#testimonial-carousel-two" data-slide-to="4" class="tran3s" title="Alom Bepari"><img src="images/home/14.jpg" alt=""></li>
+									</ol>
+
+								  	<div class="main-wrapper">
+								  		<div class="shadow"></div>
+								  		<!-- Wrapper for slides -->
+									  	<div class="carousel-inner">
+										    <div class="item active">
+										    	<h3>In case you needed something fun and pointless. Casual Friday, the Googlifier Chrome extension puts googly eyes all over your</h3>
+											    <p>Bacon questioned the Aristotelian concepts of formal cause and final cause, and promoted the idea that science should be laws of "simple" natures, such as heat, rather than assuming.</p>
+											    <div class="clearfix">
+											    	<img src="images/home/10.jpg" alt="" class="float-left">
+											    	<div class="name float-left">
+											    		<h6>Graphic Design</h6>
+											    		<i>Cambridge 2012</i>
+											    	</div>
+											    </div>
+										    </div>
+
+										    <div class="item">
+										    	<h3>In case you needed something fun and pointless. Casual Friday, the Googlifier Chrome extension puts googly eyes all over your</h3>
+											    <p>Bacon questioned the Aristotelian concepts of formal cause and final cause, and promoted the idea that science should be laws of "simple" natures, such as heat, rather than assuming.</p>
+											    <div class="clearfix">
+											    	<img src="images/home/11.jpg" alt="" class="float-left">
+											    	<div class="name float-left">
+											    		<h6>Graphic Design</h6>
+											    		<i>Cambridge 2012</i>
+											    	</div>
+											    </div>
+										    </div>
+
+										    <div class="item">
+										    	<h3>In case you needed something fun and pointless. Casual Friday, the Googlifier Chrome extension puts googly eyes all over your</h3>
+											    <p>Bacon questioned the Aristotelian concepts of formal cause and final cause, and promoted the idea that science should be laws of "simple" natures, such as heat, rather than assuming.</p>
+											    <div class="clearfix">
+											    	<img src="images/home/12.jpg" alt="" class="float-left">
+											    	<div class="name float-left">
+											    		<h6>Graphic Design</h6>
+											    		<i>Cambridge 2012</i>
+											    	</div>
+											    </div>
+										    </div>
+
+										    <div class="item">
+										    	<h3>In case you needed something fun and pointless. Casual Friday, the Googlifier Chrome extension puts googly eyes all over your</h3>
+											    <p>Bacon questioned the Aristotelian concepts of formal cause and final cause, and promoted the idea that science should be laws of "simple" natures, such as heat, rather than assuming.</p>
+											    <div class="clearfix">
+											    	<img src="images/home/13.jpg" alt="" class="float-left">
+											    	<div class="name float-left">
+											    		<h6>Graphic Design</h6>
+											    		<i>Cambridge 2012</i>
+											    	</div>
+											    </div>
+										    </div>
+
+										    <div class="item">
+										    	<h3>In case you needed something fun and pointless. Casual Friday, the Googlifier Chrome extension puts googly eyes all over your</h3>
+											    <p>Bacon questioned the Aristotelian concepts of formal cause and final cause, and promoted the idea that science should be laws of "simple" natures, such as heat, rather than assuming.</p>
+											    <div class="clearfix">
+											    	<img src="images/home/14.jpg" alt="" class="float-left">
+											    	<div class="name float-left">
+											    		<h6>Graphic Design</h6>
+											    		<i>Cambridge 2012</i>
+											    	</div>
+											    </div>
+										    </div>
+									  	</div> <!-- /.carousel-inner -->
+
+									  	<!-- Left and right controls -->
+										<a class="left carousel-control" href="#testimonial-carousel-two" data-slide="prev">
+										   <i class="flaticon-arrows"></i>
+										    <span class="sr-only">Previous</span>
+										</a>
+										<a class="right carousel-control" href="#testimonial-carousel-two" data-slide="next">
+										    <i class="flaticon-arrows"></i>
+										    <span class="sr-only">Next</span>
+										</a>
+								  	</div> <!-- /.main-wrapper -->
+								</div> <!-- /#testimonial-carousel-two -->
+							</div> <!-- /.wrapper -->
+						</div>
+						<div class="col-md-5 col-xs-12">
+							<div class="partner-logo">
+								<div class="theme-title">
+									<h2>Our Partners</h2>
+								</div> <!-- /.theme-title -->
+								<div class="row">
+									<div class="col-xs-6">
+										<div class="single-logo"><img src="images/logo/p-5.png" alt=""></div>
+									</div> <!-- /.col- -->
+									<div class="col-xs-6">
+										<div class="single-logo"><img src="images/logo/p-6.png" alt=""></div>
+									</div> <!-- /.col- -->
+									<div class="col-xs-6">
+										<div class="single-logo"><img src="images/logo/p-7.png" alt=""></div>
+									</div> <!-- /.col- -->
+									<div class="col-xs-6">
+										<div class="single-logo"><img src="images/logo/p-8.png" alt=""></div>
+									</div> <!-- /.col- -->
+								</div> <!-- /.row -->
+							</div> <!-- /.partner-logo -->
+						</div> <!-- /.col- -->
+					</div> <!-- /.row -->
+				</div> <!-- /.container -->
+			</div> <!-- /.testimonial-styleTwo -->
+
+
+			<!-- 
+			=============================================
+				Our Blog
+			============================================== 
+			-->
+			<div class="our-blog">
+				<div class="container">
+					<div class="theme-title">
+						<h2>Recent News</h2>
+						<a href="blog-grid.html" class="tran3s">Go to News</a>
+					</div> <!-- /.theme-title -->
+					<div class="row">
+						<div class="col-md-4 col-sm-6">
+							<div class="single-blog">
+								<div class="image"><img src="images/blog/1.jpg" alt=""></div>
+								<ul>
+									<li>
+										<i class="flaticon-comments"></i>
+										<a href="#" class="tran3s">13</a>
+									</li>
+									<li>
+										<i class="flaticon-heart"></i>
+										<a href="#" class="tran3s">3</a>
+									</li>
+								</ul>
+								<h4><a href="blog-details.html" class="tran3s">Build Education Website...</a></h4>
+								<p>At about the same time, Rahul Roy Chowdhury took charge of Google team that oversees...</p>
+								<a href="blog-details.html" class="tran3s">Read More</a>
+							</div> <!-- /.single-blog -->
+						</div> <!-- /.col- -->
+						<div class="col-md-4 col-sm-6">
+							<div class="single-blog">
+								<div class="image"><img src="images/blog/2.jpg" alt=""></div>
+								<ul>
+									<li>
+										<i class="flaticon-comments"></i>
+										<a href="#" class="tran3s">13</a>
+									</li>
+									<li>
+										<i class="flaticon-heart"></i>
+										<a href="#" class="tran3s">3</a>
+									</li>
+								</ul>
+								<h4><a href="blog-details.html" class="tran3s">Build Education Website...</a></h4>
+								<p>At about the same time, Rahul Roy Chowdhury took charge of Google team that oversees...</p>
+								<a href="blog-details.html" class="tran3s">Read More</a>
+							</div> <!-- /.single-blog -->
+						</div> <!-- /.col- -->
+						<div class="col-md-4 hidden-sm">
+							<div class="single-blog">
+								<div class="image"><img src="images/blog/3.jpg" alt=""></div>
+								<ul>
+									<li>
+										<i class="flaticon-comments"></i>
+										<a href="#" class="tran3s">13</a>
+									</li>
+									<li>
+										<i class="flaticon-heart"></i>
+										<a href="#" class="tran3s">3</a>
+									</li>
+								</ul>
+								<h4><a href="blog-details.html" class="tran3s">Build Education Website...</a></h4>
+								<p>At about the same time, Rahul Roy Chowdhury took charge of Google team that oversees...</p>
+								<a href="blog-details.html" class="tran3s">Read More</a>
+							</div> <!-- /.single-blog -->
+						</div> <!-- /.col- -->
+					</div> <!-- /.row -->
+				</div> <!-- /.container -->
+			</div> <!-- /.our-blog -->
+
+
+			<!-- 
+			=============================================
+				Instructor Banner
+			============================================== 
+			-->
+			<div class="instructor-banner">
+				<div class="opacity opacity-two">
+					<div class="container">
+						<h4>Become An Instructor</h4>
+						<h2>Spread Your Skills Worldwide </h2>
+						<a href="#" class="tran3s hvr-trim">Get Started Now</a>
+					</div> <!-- /.container -->
+				</div> <!-- /.opacity -->
+			</div> <!-- /.instructor-banner -->
+
+
+			<!-- 
+			=============================================
+				Amazing Feature
+			============================================== 
+			-->
+			<div class="amazing-feature">
+				<div class="container">
+					<h2>Get Notified <br>About this Amazing Features</h2>
+					<div class="row">
+						<div class="col-xs-6">
+							<div class="single-box float-right tran3s">
+								<i class="flaticon-compose"></i>
+								<h6><a href="#" class="tran3s">Write us</a></h6>
+								<p>If you’ve hung around kids all in the last few years, you know they love YouTube.</p>
+							</div> <!-- /.single-box -->
+						</div>
+						<div class="col-xs-6">
+							<div class="single-box tran3s">
+								<i class="flaticon-light-bulb"></i>
+								<h6><a href="#" class="tran3s">Making Project </a></h6>
+								<p>If you’ve hung around kids all in the last few years, you know they love YouTube.</p>
+							</div> <!-- /.single-box -->
+						</div>
+					</div>
+				</div> <!-- /.container -->
+			</div> <!-- /.amazing-feature -->
+
+
+
+			
+			<!-- 
+			=============================================
+				Footer
+			============================================== 
+			-->
+			<footer>
+				<div class="container">
+					<div class="row">
+						<div class="col-md-3 col-sm-6">
+							<div class="footer-logo">
+								<a href="index.html"><img src="images/logo/logo2.png" alt="Logo"></a>
+								<p>It was some time before he obtained any answer, and the reply, when made, was unpropitious.</p>
+								<ul>
+									<li><a href="" class="tran3s"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
+									<li><a href="" class="tran3s"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
+									<li><a href="" class="tran3s"><i class="fa fa-google-plus" aria-hidden="true"></i></a></li>
+									<li><a href="" class="tran3s"><i class="fa fa-dribbble" aria-hidden="true"></i></a></li>
+								</ul>
+							</div>
+						</div>
+						<div class="col-md-2 col-sm-3 footer-list">
+							<h6>Company</h6>
+							<ul>
+								<li><a href="about-us.html" class="tran3s">About Us</a></li>
+								<li><a href="blog-grid.html" class="tran3s">Blog</a></li>
+								<li><a href="#" class="tran3s">Become a Teacher</a></li>
+								<li><a href="contact-us.html" class="tran3s">Contact</a></li>
+								<li><a href="faq.html" class="tran3s">Faq &amp; Plicy</a></li>
+							</ul>
+						</div>
+						<div class="col-md-2 col-sm-3 footer-list">
+							<h6>Product</h6>
+							<ul>
+								<li><a href="#" class="tran3s">Education Pack</a></li>
+								<li><a href="#" class="tran3s">Eucation Starter</a></li>
+								<li><a href="#" class="tran3s">Features &amp; Skills</a></li>
+								<li><a href="#" class="tran3s">Pricing</a></li>
+								<li><a href="#" class="tran3s">Sell Your Products</a></li>
+							</ul>
+						</div>
+						<div class="col-md-2 col-sm-6 footer-list">
+							<h6>About us</h6>
+							<ul>
+								<li><a href="blog-list.html" class="tran3s">Blog</a></li>
+								<li><a href="#" class="tran3s">Toll Free Number</a></li>
+								<li><a href="#" class="tran3s">Press Releases</a></li>
+								<li><a href="#" class="tran3s">Jobs</a></li>
+								<li><a href="#" class="tran3s">Feedback</a></li>
+							</ul>
+						</div>
+						<div class="col-md-3 col-sm-6 col-xs-12 footer-subscribe">
+							<h6>Subscribe Us</h6>
+							<p>This sounded a very good reason, and Alice was quite pleased.</p>
+							<form action="#">
+								<input type="text" placeholder="Your Email">
+								<button class="tran3s p-bg-color"><i class="flaticon-envelope-back-view-outline"></i></button>
+							</form>
+						</div>
+					</div> <!-- /.row -->
+				</div> <!-- /.container -->
+
+				<div class="bottom-footer">
+					<div class="container">
+						<ul class="float-right">
+							<li><h3><span class="counter p-color">8,997</span> Products</h3></li>
+							<li><h3><span class="counter p-color">53,701</span> Members</h3></li>
+							<li><h3><span class="counter p-color">1,119</span> Shops</h3></li>
+						</ul>
+						<p class="float-left">&copy; 2019 <a href="#" class="tran3s p-color">heloshape</a>. All rights reserved</p>		
+					</div>
+				</div> <!-- /.bottom-footer -->
+			</footer>
+
+			
+	        
+
+	        <!-- Scroll Top Button -->
+			<button class="scroll-top tran3s">
+				<i class="fa fa-angle-up" aria-hidden="true"></i>
+			</button>
+	{% endblock %}
+			
+
+
+		

@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+
+{% block header %}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script>
+ $(document).ready(function(){
+            console.log("ashta")
+ $('.liked').click(function(e){
+     e.preventDefault();
+     $elem = $(this);
+     console.log($elem.text());
+ $.ajax({
+     url: $elem.attr("href"),
+     type: "get", // or "get"
+     data: JSON,
+     success: function(data) {
+        if ($elem.text()=="like"){$elem.text("unlike")}
+        else{$elem.text("like")}
+     }});
+ });
+ });
+</script>
+{% endblock header %}
+
+{% block content %}
+{% load matags%}
+{% for question,answers in zip %}
+<div class="single-review clearfix">
+<h3>{{question.question}}</h3>
+</div>
+{% for ans in answers %}
+<div class="single-review clearfix">
+        <img src="images/course/30.jpg" alt="" class="float-left">
+        <div class="text float-left">
+        <div class="clearfix">
+        <div class="float-left">
+            <h6>Marie Karles</h6>
+            <span>March 8, 2016 - 8:00am</span>
+        </div>
+                                                    
+        </div> <!-- /.clearfix -->
+        <p>{{ans.the_answer}}</p>
+        </div> <!-- /.text -->
+        {% if request.user|check:ans.likes.all %}
+        <a class="liked" href="{% url 'questions:like' pk=ans.pk %}">unlike</a>
+        {% else %}
+        <a class="liked" href="{% url 'questions:like' pk=ans.pk %}" >like</a>
+        {% endif %}
+</div> <!-- /.single-review -->
+{% endfor %}
+{% endfor %}
+<form method="post">
+{% csrf_token %}
+{{form}}
+<button type="submit">submit</button>
+</form>
+{% endblock content %}

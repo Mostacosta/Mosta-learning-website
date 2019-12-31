@@ -48,7 +48,7 @@ def create_user (request):
         else:
             print(userform.errors,profile_form.errors)
 
-    return render(request,'contacts/register.html')
+    return render(request,'contacts/sign-up.html')
 
 def activate(request, uidb64, token):
     try:
