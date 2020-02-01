@@ -1,0 +1,175 @@
+{% extends 'base.html' %}
+{% block content %}
+			<div class="inner-banner">
+				<div class="opacity">
+					<div class="container">
+						<h2>Instructor Profile</h2>
+						<ul>
+							<li><a href="{% url 'home'%}" class="tran3s">Home</a></li>
+							<li>/</li>
+							<li>Student</li>
+						</ul>
+					</div> <!-- /.container -->
+				</div> <!-- /.opacity -->
+			</div> <!-- /.inner-banner -->
+
+
+
+			<!-- 
+			=============================================
+				Our Instructors Profile
+			============================================== 
+			-->
+			<div class="our-instructor-profile">
+				<div class="container">
+					<div class="row">
+						<div class="col-md-4 col-sm-6 col-xs-12"><img src="{{profile.picture.url}}" alt=""></div>
+						<div class="col-md-8 col-xs-12">
+							<div class="text">
+								<div class="title">
+									<h4>{{user.username}}</h4>
+									<span> Student </span>
+								</div> <!-- /.title -->
+								<br>
+								<h6>How many answers {{user.username}} writes : {{answers}} </h6>
+								<ul class="instructor-achivement clearfix">
+								<h6>Exam Results :</h6>
+								{% for result in results %}
+									<li></h6>{{result.course.name}} : {{result.degree|truncatechars:5}}%</h6> </li>
+								{% endfor %}
+								</ul>
+							</div> <!-- /.text -->
+						</div> <!-- /.col- -->
+					</div> <!-- /.row -->
+				</div> <!-- /.container -->
+			</div> <!-- /.our-instructor-profile -->
+
+
+			<!-- 
+			=============================================
+				Teachers Course
+			============================================== 
+			-->
+			<div class="teachers-course popular-course">
+				<div class="container">
+					<h3>Courses by Lopa Murai</h3>
+					<div class="row">
+						<div class="teachers-course-slider">
+							<div class="item">
+								<div class="single-course">
+									<div class="image-box"><img src="images/course/1.jpg" alt=""></div>
+									<div class="text">
+										<div class="image"><img src="images/course/4.jpg" alt=""></div>
+										<div class="name clearfix">
+											<h6 class="float-left">Jannatul</h6>
+											<span class="p-bg-color float-right">Free</span>
+										</div>
+										<h5><a href="course-details.html" class="tran3s">Angular 2 Essential Training JavaScript Framework</a></h5>
+										<ul class="clearfix">
+											<li class="float-left">
+												<i class="flaticon-people"></i>
+												<a href="#" class="tran3s">2,680</a>
+											</li>
+											<li class="float-left">
+												<i class="flaticon-comments"></i>
+												<a href="#" class="tran3s">13</a>
+											</li>
+											<li class="float-right">
+												<i class="flaticon-heart"></i>
+												<a href="#" class="tran3s">3</a>
+											</li>
+										</ul>
+									</div>
+								</div> <!-- /.single-course -->
+							</div> <!-- /.col- -->
+							<div class="item">
+								<div class="single-course">
+									<div class="image-box"><img src="images/course/2.jpg" alt=""></div>
+									<div class="text">
+										<div class="image"><img src="images/course/4.jpg" alt=""></div>
+										<div class="name clearfix">
+											<h6 class="float-left">Jannatul</h6>
+											<strong class="s-color float-right">$79<sup>.99</sup></strong>
+										</div>
+										<h5><a href="course-details.html" class="tran3s">Angular 2 Essential Training JavaScript Framework</a></h5>
+										<ul class="clearfix">
+											<li class="float-left">
+												<i class="flaticon-people"></i>
+												<a href="#" class="tran3s">2,680</a>
+											</li>
+											<li class="float-left">
+												<i class="flaticon-comments"></i>
+												<a href="#" class="tran3s">13</a>
+											</li>
+											<li class="float-right">
+												<i class="flaticon-heart"></i>
+												<a href="#" class="tran3s">3</a>
+											</li>
+										</ul>
+									</div>
+								</div> <!-- /.single-course -->
+							</div> <!-- /.col- -->
+							<div class="item">
+								<div class="single-course">
+									<div class="image-box"><img src="images/course/3.jpg" alt=""></div>
+									<div class="text">
+										<div class="image"><img src="images/course/4.jpg" alt=""></div>
+										<div class="name clearfix">
+											<h6 class="float-left">Jannatul</h6>
+											<span class="p-bg-color float-right">Free</span>
+										</div>
+										<h5><a href="course-details.html" class="tran3s">Angular 2 Essential Training JavaScript Framework</a></h5>
+										<ul class="clearfix">
+											<li class="float-left">
+												<i class="flaticon-people"></i>
+												<a href="#" class="tran3s">2,680</a>
+											</li>
+											<li class="float-left">
+												<i class="flaticon-comments"></i>
+												<a href="#" class="tran3s">13</a>
+											</li>
+											<li class="float-right">
+												<i class="flaticon-heart"></i>
+												<a href="#" class="tran3s">3</a>
+											</li>
+										</ul>
+									</div>
+								</div> <!-- /.single-course -->
+							</div> <!-- /.col- -->
+							<div class="item">
+								<div class="single-course">
+									<div class="image-box"><img src="images/course/2.jpg" alt=""></div>
+									<div class="text">
+										<div class="image"><img src="images/course/4.jpg" alt=""></div>
+										<div class="name clearfix">
+											<h6 class="float-left">Jannatul</h6>
+											<span class="p-bg-color float-right">Free</span>
+										</div>
+										<h5><a href="course-details.html" class="tran3s">Angular 2 Essential Training JavaScript Framework</a></h5>
+										<ul class="clearfix">
+											<li class="float-left">
+												<i class="flaticon-people"></i>
+												<a href="#" class="tran3s">2,680</a>
+											</li>
+											<li class="float-left">
+												<i class="flaticon-comments"></i>
+												<a href="#" class="tran3s">13</a>
+											</li>
+											<li class="float-right">
+												<i class="flaticon-heart"></i>
+												<a href="#" class="tran3s">3</a>
+											</li>
+										</ul>
+									</div>
+								</div> <!-- /.single-course -->
+							</div> <!-- /.col- -->
+						</div>
+					</div> <!-- /.row -->
+				</div> <!-- /.container -->
+			</div> <!-- /.teachers-course -->
+
+
+
+			
+		
+{%endblock%}

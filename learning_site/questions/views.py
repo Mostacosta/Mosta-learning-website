@@ -5,6 +5,8 @@ from .forms import question_form,answer_form
 from django.http import JsonResponse
 from django.core import serializers
 from django.template.loader import render_to_string
+from permissions.permissions import active_user_required
+from django.contrib.auth.decorators import login_required
 # Create your views here.
 
 def question_view (request,pk):
@@ -27,17 +29,19 @@ def question_list(request,pk):
 
 def answer_view(request,pk):
         form = answer_form()
+        question_ = question.objects.get(pk=pk)
         if request.method == "POST":
                 form = answer_form(request.POST)
                 if form.is_valid():
                         new_answer = form.save(commit=False)
-                        new_answer.question = question.objects.get(pk=pk)
+                        new_answer.question = question_
                         new_answer.user = request.user
                         new_answer.save()
-                        return redirect('questions:answer_list',pk=pk)
-        else:
-                return render (request,'questions/answer.html',{'form':form})
+                else:
+                        print(form.errors)
+        return redirect('questions:lesson_view',pk=question_.lesson.pk)
 
+     
 def answer_list (request,pk):
         question_ = question.objects.get(pk=pk)
         answers = answer.objects.filter(question= question_)
@@ -61,4 +65,21 @@ def answer_like (request,pk):
         return HttpResponse("a7a")
 
 
-
+@login_required(redirect_field_name="contacts:signup")
+def lesson_view (request,pk):
+    form = question_form()
+    lesson_ = lesson.objects.get(pk=pk)
+    if request.method == "POST":
+        form = question_form(request.POST,request.FILES)
+        if form.is_valid():
+            ques_=form.save(commit=False)
+            ques_.user = request.user
+            ques_.lesson=lesson_
+            form.save()
+            return redirect('questions:lesson_view',pk=pk)
+    questions = question.objects.filter(lesson=lesson_)
+    answers = []
+    for question_ in questions :
+        answers.append(answer.objects.filter(question=question_))
+    zip_list = zip (questions,answers)
+    return render (request,"questions/answer_list.html",{"zip":zip_list,"form":form})

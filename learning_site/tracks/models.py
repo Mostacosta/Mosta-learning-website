@@ -1,11 +1,16 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.utils import timezone
+from contacts.models import teacher
 
 # Create your models here.
 class track(models.Model):
     name = models.CharField(max_length=150)
     bio = models.TextField()
+    image = models.ImageField(blank=True,upload_to="tracks")
+    points = models.TextField(blank=True)
+    track_designer = models.ForeignKey(teacher,on_delete=models.SET_NULL,null=True)
+
 
     def __str__ (self):
         return self.name

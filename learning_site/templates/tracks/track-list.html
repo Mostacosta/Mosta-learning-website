@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% block content  %}
+{% load static %}
 			<!-- 
 			=============================================
 				Theme Inner Banner
@@ -10,7 +11,7 @@
 					<div class="container">
 						<h2>Our Tracks</h2>
 						<ul>
-							<li><a href="index.html" class="tran3s">Home</a></li>
+							<li><a href="{% url 'home' %}" class="tran3s">Home</a></li>
 							<li>/</li>
 							<li>Tracks</li>
 						</ul>
@@ -29,31 +30,23 @@
 					<div class="row">
 						<div class="col-lg-9 col-md-8 col-xs-12 popular-course float-right">
 							<div class="course-style-filter clearfix">
-								<ul class="float-left clearfix">
-									<li><a href="#" class="tran3s">Tending</a></li>
-									<li><a href="#" class="tran3s">New</a></li>
-									<li><a href="#" class="tran3s active">Populer</a></li>
-									<li><a href="#" class="tran3s">free</a></li>
-								</ul>
-								<ul class="float-right">
-									<li><a href="course-grid.html" class="tran3s"><i class="fa fa-th-large" aria-hidden="true"></i></a></li>
-									<li><a href="#" class="tran3s active"><i class="fa fa-list" aria-hidden="true"></i></a></li>
-								</ul>
+								
 							</div> <!-- /.course-style-filter -->
 							{% for track in tracks %}
 								<div class="single-course clearfix">
-									<div class="image-box float-left"><img src="images/course/18.jpg" alt=""></div>
+									<div class="image-box float-left"><img src={{track.image.url}} alt=""></div>
 									<div class="text float-left">
 										<div class="name clearfix">
-											<div class="image"><img src="images/course/5.jpg" alt=""></div>
+											<div class="image"><img src={{track.track_designer.img.url}} alt=""></div>
 											<div class="float-left">
-												<h6>Abdus Salam</h6>
-												<i>Senior Java Developer</i>
+												<a href="{% url 'contacts:teacher' pk=track.track_designer.pk %}"><h6>{{track.track_designer.name}}</h6></a>
+												<br>
+												<i>{{track.track_designer.position}}</i>
 											</div>
-											<span class="p-bg-color float-right">Free</span>
+											<span class="p-bg-color float-right">Learn Hard</span>
 										</div>
 										<h5><a href="{% url 'tracks:course_list' pk=track.pk %}" class="tran3s">{{track.name}}</a></h5>
-										<p>Lorem ipsum dolor sit amet, duo vide etiam periculis ei, ius inumian lorem iuvaret. Cum nemro assum copiosae despite...</p>
+										<p>{{track.bio|truncatewords:50}}</p>
 										<ul class="clearfix">
 											<li class="float-left">
 												<i class="flaticon-people"></i>
@@ -71,223 +64,35 @@
 									</div>
 								</div> <!-- /.single-course -->
 								{% endfor %}
-								
+							{% if tracks.has_other_pages %}
 							<ul class="theme-pagination clearfix">
-								<li><a href="" class="tran3s active">1</a></li>
-								<li><a href="" class="tran3s">2</a></li>
-								<li><a href="" class="tran3s">3</a></li>
-								<li><a href="#" class="tran3s">Next</a></li>
+							{% for i in tracks.paginator.page_range %}
+								{% if tracks.number == i %}
+									<li><a href="?page={{i}}" class="tran3s active">{{i}}</a></li>
+								{% else %}
+									<li><a href="?page={{i}}" class="tran3s">{{i}}</a></li>
+								{% endif %}
+							{% endfor %}
+								{% if tracks.has_next %}
+									<li><a href="?page={{ tracks.next_page_number }}" class="tran3s">Next</a></li>
+								{% else %}
+									<li><a class='disable' class="tran3s">Next</a></li>
+								{% endif %}
 							</ul> <!-- /.theme-pagination -->
+							{% endif %}
 						</div> <!-- /.popular-course -->
 
 						<!-- ************************* SIDEBAR ***************************** -->
 						<div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
 							<div class="course-sidebar">
 								<div class="sidebar-categories">
-									<h4>Categories</h4>
-									<div class="panel-group theme-accordion" id="accordion">
-									  <div class="panel">
-									    <div class="panel-heading active-panel">
-									      <h6 class="panel-title">
-									        <a data-toggle="collapse" data-parent="#accordion" href="#collapse1">
-									        Web Develoment</a>
-									      </h6>
-									    </div>
-									    <div id="collapse1" class="panel-collapse collapse in">
-									      <div class="panel-body">
-									      	<ul>
-									      		<li><a href="#" class="tran3s">Html/Css</a></li>
-									      		<li><a href="#" class="tran3s">jQuery</a></li>
-									      		<li><a href="#" class="tran3s">Sass/less</a></li>
-									      	</ul>
-									      </div>
-									    </div>
-									  </div> <!-- /panel 1 -->
-									  <div class="panel">
-									    <div class="panel-heading">
-									      <h6 class="panel-title">
-									        <a data-toggle="collapse" data-parent="#accordion" href="#collapse2">
-									        Graphics Design</a>
-									      </h6>
-									    </div>
-									    <div id="collapse2" class="panel-collapse collapse">
-									      <div class="panel-body">
-									      	<ul>
-									      		<li><a href="#" class="tran3s">Html/Css</a></li>
-									      		<li><a href="#" class="tran3s">jQuery</a></li>
-									      		<li><a href="#" class="tran3s">Sass/less</a></li>
-									      	</ul>
-									      </div>
-									    </div>
-									  </div> <!-- /panel 2 -->
-									  <div class="panel">
-									    <div class="panel-heading">
-									      <h6 class="panel-title">
-									        <a data-toggle="collapse" data-parent="#accordion" href="#collapse3">
-									        Web Design</a>
-									      </h6>
-									    </div>
-									    <div id="collapse3" class="panel-collapse collapse">
-									      <div class="panel-body">
-									      	<ul>
-									      		<li><a href="#" class="tran3s">Html/Css</a></li>
-									      		<li><a href="#" class="tran3s">jQuery</a></li>
-									      		<li><a href="#" class="tran3s">Sass/less</a></li>
-									      	</ul>
-									      </div>
-									    </div>
-									  </div> <!-- /panel 3 -->
-									  <div class="panel">
-									    <div class="panel-heading">
-									      <h6 class="panel-title">
-									        <a data-toggle="collapse" data-parent="#accordion" href="#collapse4">
-									        IOS/Android Development</a>
-									      </h6>
-									    </div>
-									    <div id="collapse4" class="panel-collapse collapse">
-									      <div class="panel-body">
-									      	<ul>
-									      		<li><a href="#" class="tran3s">Html/Css</a></li>
-									      		<li><a href="#" class="tran3s">jQuery</a></li>
-									      		<li><a href="#" class="tran3s">Sass/less</a></li>
-									      	</ul>
-									      </div>
-									    </div>
-									  </div> <!-- /panel 4 -->
-									  <div class="panel">
-									    <div class="panel-heading">
-									      <h6 class="panel-title">
-									        <a data-toggle="collapse" data-parent="#accordion" href="#collapse5">
-									        Others</a>
-									      </h6>
-									    </div>
-									    <div id="collapse5" class="panel-collapse collapse">
-									      <div class="panel-body">
-									      	<ul>
-									      		<li><a href="#" class="tran3s">Html/Css</a></li>
-									      		<li><a href="#" class="tran3s">jQuery</a></li>
-									      		<li><a href="#" class="tran3s">Sass/less</a></li>
-									      	</ul>
-									      </div>
-									    </div>
-									  </div> <!-- /panel 5 -->
-									</div> <!-- end #accordion -->
-								</div> <!-- /.sidebar-categories -->
+									
+								
+										
 
-								<div class="course-filter">
-									<h4>Search By Filters</h4>
-									<form action="" class="main-wrapper">
-										<div class="tag-option">
-											<h5>Tag</h5>
-											<ul class="clearfix">
-												<li>
-													<input type="checkbox" id="book" checked>
-													<label for="book">Book</label>
-												</li>
-												<li>
-													<input type="checkbox" id="linux">
-													<label for="linux">Linux</label>
-												</li>
-												<li>
-													<input type="checkbox" id="design" checked>
-													<label for="design">Design</label>
-												</li>
-												<li>
-													<input type="checkbox" id="development" checked>
-													<label for="development">Development</label>
-												</li>
-												<li>
-													<input type="checkbox" id="art" checked>
-													<label for="art">Art</label>
-												</li>
-												<li>
-													<input type="checkbox" id="web">
-													<label for="web">Design</label>
-												</li>
-												<li>
-													<input type="checkbox" id="software">
-													<label for="software">Softwear</label>
-												</li>
-												<li>
-													<input type="checkbox" id="php" checked>
-													<label for="php">PHP</label>
-												</li>
-											</ul>
-										</div> <!-- /.tag-option -->
+										
 
-										<div class="course-price-filter">
-											<h5>Price Range</h5>
-											<div class="price-ranger">
-												<div class="ranger-min-max-block">
-													<ul class="clearfix">
-														<li class="float-left">
-															<label for="min">From</label>
-															<input type="text" class="min" readonly>
-														</li>
-														<li class="float-left">
-															<label for="max">To</label>
-															<input type="text" class="max" readonly>
-														</li>
-													</ul>
-												</div>
-												<div id="slider-range"></div>
-											</div> <!-- /price-ranger -->
-										</div> <!-- /.course-price-filter -->
-
-										<div class="course-work-level">
-											<h5>Work level</h5>
-											<ul class="clearfix">
-												<li>
-													<input type="checkbox" id="starting">
-													<label for="starting">Starting</label>
-												</li>
-												<li>
-													<input type="checkbox" id="begainer">
-													<label for="begainer">Begainer</label>
-												</li>
-												<li>
-													<input type="checkbox" id="expert" checked>
-													<label for="expert">Expert</label>
-												</li>
-												<li>
-													<input type="checkbox" id="intermediate">
-													<label for="intermediate">Intermediate</label>
-												</li>
-												<li>
-													<input type="checkbox" id="advance">
-													<label for="advance">Advance</label>
-												</li>
-											</ul>
-										</div> <!-- /.course-work-level -->
-
-										<div class="course-location">
-											<h5>Location</h5>
-											<div class="form-group">
-										      <div>
-										        <select id="loaction" class="selectpicker show-tick form-control" data-live-search="true">
-										          <option>Dhaka</option>
-										          <option>Bab Ezzouar</option>
-										          <option>Baguio</option>
-										          <option>London</option>
-										          <option>Paris</option>
-										          <option>Dubai</option>
-										          <option>New York</option>
-										          <option>Singapore</option>
-										          <option>Kuala Lumpur</option>
-										          <option>Istanbul</option>
-										          <option>Tokyo</option>
-										          <option>Seoul</option>
-										          <option>Amsterdam</option>
-										          <option>Osaka</option>
-										          <option>Vienna</option>
-										        </select>
-										      </div>
-										    </div>
-										</div> <!-- /.course-location -->
-
-										<div class="button-wrapper"><input type="submit" value="Apply filters" class="p-bg-color tran3s"></div>
-									</form> <!-- /.main-wrapper -->
-								</div> <!-- /.course-filter -->
+									</div> <!-- /.course-filter -->
 							</div> <!-- /.course-sidebar -->
 						</div> <!-- /.col- -->
 					</div> <!-- /.row -->
@@ -296,85 +101,5 @@
 
 
 			
-			<!-- 
-			=============================================
-				Footer
-			============================================== 
-			-->
-			<footer>
-				<div class="container">
-					<div class="row">
-						<div class="col-md-3 col-sm-6">
-							<div class="footer-logo">
-								<a href="index.html"><img src="images/logo/logo2.png" alt="Logo"></a>
-								<p>It was some time before he obtained any answer, and the reply, when made, was unpropitious.</p>
-								<ul>
-									<li><a href="" class="tran3s"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
-									<li><a href="" class="tran3s"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
-									<li><a href="" class="tran3s"><i class="fa fa-google-plus" aria-hidden="true"></i></a></li>
-									<li><a href="" class="tran3s"><i class="fa fa-dribbble" aria-hidden="true"></i></a></li>
-								</ul>
-							</div>
-						</div>
-						<div class="col-md-2 col-sm-3 footer-list">
-							<h6>Company</h6>
-							<ul>
-								<li><a href="about-us.html" class="tran3s">About Us</a></li>
-								<li><a href="blog-grid.html" class="tran3s">Blog</a></li>
-								<li><a href="#" class="tran3s">Become a Teacher</a></li>
-								<li><a href="contact-us.html" class="tran3s">Contact</a></li>
-								<li><a href="faq.html" class="tran3s">Faq &amp; Plicy</a></li>
-							</ul>
-						</div>
-						<div class="col-md-2 col-sm-3 footer-list">
-							<h6>Product</h6>
-							<ul>
-								<li><a href="#" class="tran3s">Education Pack</a></li>
-								<li><a href="#" class="tran3s">Eucation Starter</a></li>
-								<li><a href="#" class="tran3s">Features &amp; Skills</a></li>
-								<li><a href="#" class="tran3s">Pricing</a></li>
-								<li><a href="#" class="tran3s">Sell Your Products</a></li>
-							</ul>
-						</div>
-						<div class="col-md-2 col-sm-6 footer-list">
-							<h6>About us</h6>
-							<ul>
-								<li><a href="blog-list.html" class="tran3s">Blog</a></li>
-								<li><a href="#" class="tran3s">Toll Free Number</a></li>
-								<li><a href="#" class="tran3s">Press Releases</a></li>
-								<li><a href="#" class="tran3s">Jobs</a></li>
-								<li><a href="#" class="tran3s">Feedback</a></li>
-							</ul>
-						</div>
-						<div class="col-md-3 col-sm-6 col-xs-12 footer-subscribe">
-							<h6>Subscribe Us</h6>
-							<p>This sounded a very good reason, and Alice was quite pleased.</p>
-							<form action="#">
-								<input type="text" placeholder="Your Email">
-								<button class="tran3s p-bg-color"><i class="flaticon-envelope-back-view-outline"></i></button>
-							</form>
-						</div>
-					</div> <!-- /.row -->
-				</div> <!-- /.container -->
-
-				<div class="bottom-footer">
-					<div class="container">
-						<ul class="float-right">
-							<li><h3><span class="counter p-color">8,997</span> Products</h3></li>
-							<li><h3><span class="counter p-color">53,701</span> Members</h3></li>
-							<li><h3><span class="counter p-color">1,119</span> Shops</h3></li>
-						</ul>
-						<p class="float-left">&copy; 2019 <a href="#" class="tran3s p-color">heloshape</a>. All rights reserved</p>		
-					</div>
-				</div> <!-- /.bottom-footer -->
-			</footer>
-
-
-			
-
-	        <!-- Scroll Top Button -->
-			<button class="scroll-top tran3s">
-				<i class="fa fa-angle-up" aria-hidden="true"></i>
-			</button>
 {% endblock %}
 

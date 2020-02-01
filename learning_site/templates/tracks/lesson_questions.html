@@ -29,6 +29,7 @@
 <h3>{{question.question}}</h3>
 </div>
 {% for ans in answers %}
+
 <div class="single-review clearfix">
         <img src="images/course/30.jpg" alt="" class="float-left">
         <div class="text float-left">
@@ -41,12 +42,12 @@
         </div> <!-- /.clearfix -->
         <p>{{ans.the_answer}}</p>
         </div> <!-- /.text -->
-        {% if request.user|check:ans.likes.all %}
+       {% if request.user|check:ans.likes.all %} 
         <a class="liked" href="{% url 'questions:like' pk=ans.pk %}">unlike</a>
         {% else %}
         <a class="liked" href="{% url 'questions:like' pk=ans.pk %}" >like</a>
         {% endif %}
-</div> <!-- /.single-review -->
+</div> 
 {% endfor %}
 {% endfor %}
 <form method="post">

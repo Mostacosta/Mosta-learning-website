@@ -28,6 +28,7 @@ urlpatterns = [
     path('account',include('contacts.urls')),
     url(r'^login/$', views.login_view ,name='login'),
     url(r'^logout/$', views.logout_view ,name='logout'),
+    path('profile',views.profile,name='profile'),
     path("test",views.permissions_test),
     path('tracks',include('tracks.urls')),
     path('questions',include('questions.urls')),

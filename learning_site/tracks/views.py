@@ -6,21 +6,41 @@ from questions.forms import question_form
 from datetime import datetime
 import dateutil.parser
 from django.utils import timezone
+from django.views.decorators.cache import cache_page
+import random
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from django.contrib.auth.decorators import login_required
+from django.contrib import messages
+
 
 # Create your views here.
 def track_list(request):
     tracks = track.objects.all()
+    page = request.GET.get('page', 1)
+    paginator = Paginator(tracks, 3)
+    try:
+        tracks = paginator.page(page)
+    except PageNotAnInteger:
+        tracks = paginator.page(1)
+    except EmptyPage:
+        tracks = paginator.page(paginator.num_pages)
+
     return render (request,'tracks/track-list.html',{"tracks":tracks})
 
 def course_list(request,pk):
     my_track = track.objects.get(pk=pk)
     courses = course.objects.filter(track=my_track)
+    points = my_track.points.split(",")
     lessons_ = []
     for course_ in courses:
         lessons = lesson.objects.filter(course=course_)
         lessons_.append(lessons)
-    courses = zip(courses,lessons_)
-    return render (request,'tracks/course-details.html',{"courses":courses,"track":my_track})
+    zip_ = zip(courses,lessons_)
+    if request.user.is_authenticated:
+        pass
+    else:
+        messages.error(request,"login to be able to preview lessons")
+    return render (request,'tracks/course-details.html',{"courses":zip_,"track":my_track,"len":len(courses),"points":points})
 
 def lesson_list(request,pk):
     my_course = course.objects.get(pk=pk)
@@ -30,11 +50,6 @@ def lesson_list(request,pk):
 def lesson_view (request,pk):
     form = question_form()
     lesson_ = lesson.objects.get(pk=pk)
-    questions = question.objects.filter(lesson=lesson_)
-    answers = []
-    for question_ in questions :
-        answers.append(answer.objects.filter(question=question_))
-    zip_list = zip (questions,answers)
     if request.method == "POST":
         form = question_form(request.POST,request.FILES)
         if form.is_valid():
@@ -42,7 +57,12 @@ def lesson_view (request,pk):
             ques_.user = request.user
             ques_.lesson=lesson_
             form.save()
-    return render (request,"tracks/lesson_questions.html",{"zip":zip_list,"form":form})
+    questions = question.objects.filter(lesson=lesson_)
+    answers = []
+    for question_ in questions :
+        answers.append(answer.objects.filter(question=question_))
+    zip_list = zip (questions,answers)
+    return render (request,"questions/answer_list.html",{"zip":zip_list,"form":form})
 
 def lesson_watch (request,pk):
     lesson_ = lesson.objects.get(pk=pk)
@@ -51,10 +71,11 @@ def lesson_watch (request,pk):
         lesson_.save()
     return HttpResponse("watched")
 
-
+@login_required(redirect_field_name="contacts:signup")
+@cache_page(60)
 def exam_view (request,pk):
     course_ = course.objects.get(pk=pk)
-    questions = exam.objects.filter(course=course_)
+    questions = sorted(exam.objects.filter(course=course_),key=lambda x: random.random()) 
     try:
         result = exam_result.objects.get(course=course_,user=request.user)
     except :
@@ -108,6 +129,7 @@ def exam_view (request,pk):
             return HttpResponse ("no session")
     else:
         request.session['time'] = datetime.now().isoformat()
+    print(request.session['time'])
     return render (request,'tracks/exam.html',{"questions":questions})
 
 

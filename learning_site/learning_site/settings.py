@@ -89,6 +89,12 @@ DATABASES = {
     }
 }
 
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.db.DatabaseCache',
+        'LOCATION': 'my_cache_table',
+    }
+}
 
 # Password validation
 # https://docs.djangoproject.com/en/2.2/ref/settings/#auth-password-validators
@@ -138,7 +144,8 @@ EMAIL_HOST_PASSWORD = 'mostacostasosta'
 EMAIL_PORT = 587
 
 
-LOGIN_REDIRECT_URL = 'home'
+LOGIN_URL = 'contacts:signup'
+LOGIN_REDIRECT_URL = 'contacts:signup'
 
 #sessions properties
 

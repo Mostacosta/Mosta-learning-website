@@ -4,9 +4,9 @@ from .models import question,answer
 class question_form (forms.ModelForm):
     class Meta :
         model = question
-        fields = ('question','image')
+        fields = ('question',)
 
 class answer_form (forms.ModelForm):
      class Meta :
         model = answer
-        fields = ('the_answer','image')
+        fields = ('the_answer',)

@@ -1,57 +1,120 @@
-<!DOCTYPE html>
-{% load matags %}
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Title of the document</title>
-<script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
+{% extends 'base.html' %}
+{% block header %}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script>
-        $(document).ready(function(){
+ $(document).ready(function(){
             console.log("ashta")
- $('.like').click(function(e){
+ $('.liked').click(function(e){
      e.preventDefault();
      $elem = $(this);
-     console.log($elem.attr("href"))
+     console.log($elem.text());
  $.ajax({
      url: $elem.attr("href"),
      type: "get", // or "get"
      data: JSON,
      success: function(data) {
-         $elem.text(function(n){
-             var txt = $elem.text();
-             console.log(txt)
-             if (txt=="like")
-             {
-                 console.log('ss')
-                 return "unlike";
-             }else{
-                 return "like";
-             }
-     });
+        if ($elem.text()=="like"){$elem.text("unlike")}
+        else{$elem.text("like")}
      }});
  });
  });
- </script>
-</head>
+</script>
+{% endblock header %}
+{% block content %}
+{% load static %}
+{% load matags%}
+ 
+			<div class="inner-banner">
+				<div class="opacity">
+					<div class="container">
+						<h2>faq's</h2>
+						<ul>
+							<li><a href="index.html" class="tran3s">Home</a></li>
+							<li>/</li>
+							<li>Faq</li>
+						</ul>
+					</div> <!-- /.container -->
+				</div> <!-- /.opacity -->
+			</div> <!-- /.inner-banner -->
 
-<body>
-    <h1>{{question.question}}</h1>
-    <ol>
-        {%for answer in answers%}
-           <li> {{answer.the_answer}}  {{request.user|check:answer.likes}} </li>
-            {% if request.user|check:answer.likes %}
-            <a class="like" href="{% url 'questions:like' pk=answer.pk%}">unlike</a>
-            {%else%}
-                <a class="like" href="{% url 'questions:like' pk=answer.pk%}">like</a>
-            {%endif%}
-        {%endfor%}
-    </ol>
-    <form method="POST" enctype="multipart/form-data">
-        {% csrf_token %}
-        {{form.as_p}}
-        <button type="submit">submit</button>
-    </form>
-    <a href="{%url 'tracks:lesson_view' pk=question.lesson.pk%}">back to lesson</a>
-</body>
 
-</html>
+
+			<!-- 
+			=============================================
+				Popular Faq
+			============================================== 
+			-->
+			<div class="popular-faq">
+				<div class="container">
+					<div class="theme-title text-center">
+						<h2>Frequently Asked Questions</h2>
+						<p>If you have any concerns please read this collection of frequently asked questions before contacting us. If <br> you are still unclear about something feel free to contact.</p>
+					</div> <!-- /.theme-title -->
+					<div class="row">
+	        			
+	        			<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+	        				<!-- ================== FAQ Panel ================ -->
+	        				<div class="faq-panel">
+								<div class="panel-group " >
+								{% for question,answers in zip %}
+								  <div class="panel">
+								    <div class="panel-heading">
+								      <h6 class="panel-title">
+								        <a>
+								        {{question.question}}</a>
+								      </h6>
+								    </div>
+								    
+									{% for ans in answers %}
+                                    <div class="panel-body">
+										<div class="name clearfix">
+											<div class="float-left">
+												<h6><strong>{{ans.user}} :</strong></h6>
+											</div>
+											</div>
+                                          <p>{{ans.the_answer}} </p>
+                                          
+                                          {% if request.user|check:ans.likes.all %} 
+        									<a class="liked" href="{% url 'questions:like' pk=ans.pk %}">unlike</a>
+											{% else %}
+											<a class="liked" href="{% url 'questions:like' pk=ans.pk %}" >like</a>
+										{% endif %}
+								     </div>
+									{% endfor %}
+									<div class="container">
+										<form method="post" action='{% url 'questions:answer_view' pk=question.pk %}'>
+											{% csrf_token %}
+											<div class="form-group">
+											<label for="comment">add your answer:</label>
+											<textarea name="the_answer" class="form-control" rows="5" id="comment"></textarea>
+											</div>
+											<input type="submit" value="Submit answer" class=" tran3s">
+										</form>
+									</div>
+								</div> <!-- end #accordion3 -->
+								{% endfor %}
+							</div> <!-- End of .faq-panel -->
+	        			</div> <!-- /.col- -->
+	        		</div> <!-- /.row -->
+				</div>
+			</div> <!-- /.popular-faq -->
+
+			<div class="faq-form">
+				<div class="container">
+					<h2>Didn't find the answer?</h2>
+					<form method="post">
+					{% csrf_token %}
+						<div class="row">
+							<div class="col-xs-12">
+								<textarea name='question' placeholder="Your Question"></textarea>
+							</div>
+						</div>
+						<input type="submit" value="Submit Question" class="s-bg-color tran3s">
+					</form>
+				</div>
+			</div>
+			
+
+
+			
+{% endblock content %}

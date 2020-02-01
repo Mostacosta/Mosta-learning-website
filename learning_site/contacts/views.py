@@ -11,6 +11,8 @@ from django.contrib.auth.models import User
 from django.core.mail import EmailMessage
 from django.contrib.auth.hashers import check_password
 from django.contrib.auth.decorators import login_required
+from .models import teacher
+from django.contrib import messages
 
 # Create your views here.
 def create_user (request):
@@ -44,9 +46,9 @@ def create_user (request):
                 mail_subject, message, to=[to_email]
             )
             email.send()
-            return redirect('home')
+            return HttpResponse("check your mail")
         else:
-            print(userform.errors,profile_form.errors)
+            messages.error(request,userform.errors.as_text()+profileform.errors.as_text())
 
     return render(request,'contacts/sign-up.html')
 
@@ -133,3 +135,7 @@ def change_password (request):
 
 
     return render(request,'contacts/resetpassword.html',{'form':form})
+
+def teacher_details (request,pk):
+    teacher_ = teacher.objects.get(pk=pk)
+    return render (request,'contacts/teacher.html',{"teacher":teacher_})
