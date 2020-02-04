@@ -29,7 +29,7 @@ def track_list(request):
 
 def course_list(request,pk):
     my_track = track.objects.get(pk=pk)
-    courses = course.objects.filter(track=my_track)
+    courses = course.objects.filter(track=my_track).order_by("order")
     points = my_track.points.split(",")
     lessons_ = []
     for course_ in courses:

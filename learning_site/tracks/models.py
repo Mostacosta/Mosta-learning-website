@@ -20,7 +20,7 @@ class course (models.Model):
     bio = models.TextField()
     order = models.IntegerField(max_length=5)
     track = models.ManyToManyField(track)
-    succeeded_users = models.ManyToManyField(User,null=True)
+    succeeded_users = models.ManyToManyField(User,blank=True)
 
     def __str__ (self):
         return self.name
@@ -30,7 +30,7 @@ class lesson (models.Model):
     link = models.URLField()
     order = models.IntegerField(max_length=5)
     course = models.ForeignKey(course,on_delete=models.CASCADE)
-    watching_users = models.ManyToManyField(User,null=True)
+    watching_users = models.ManyToManyField(User,blank=True)
 
     def __str__ (self):
         return self.name
